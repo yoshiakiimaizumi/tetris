@@ -1,3 +1,3 @@
 # tetris
-game
-ソケットio....
+
+Socket io がないと使えません。
