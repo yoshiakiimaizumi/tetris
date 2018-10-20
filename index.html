@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>TETLE</title>
+ <link rel='stylesheet' href='./css/style.css'>
+
+    <meta charset="utf-8">
+  </head>
+  <body class="bg-image-loop">
+<script src='/socket.io/socket.io.js' type="text/javascript"></script>
+    <!--   勝利判定の画像 -->
+    <img class="win" src="images/WIN.png" width="700" heigth="700" alt="win">
+    <img class="lose" src="images/LOSE.png" width="700" heigth="700" alt="win">
+    <!--   勝利判定の画像 end -->
+    <div class="overhidden">
+      <canvas  class ="main" id = "enemydisp" width="300" height="600"></canvas>
+         <div class="content">
+            <div id="counter">TIMER</div>
+            <canvas id="nextShape"></canvas>
+        </div>
+      <canvas class ="main" id = "mydisp" width="300" height="600"></canvas>
+      <button id="getStart">TETLE■■</button>
+    </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+  <script>
+
+ $(function(){
+//      var socket = io.connect('http://160.16.124.94/node_sample');
+       socket = io.connect();
+       attackedCounter = 0;
+      $("#getStart").click(function(){
+        console.log("1 ok");
+        $("#getStart").prop("disabled", true);
+        $("#getStart").fadeOut(1000);
+        socket.emit('aikotoba','start');
+      });
+      socket.on('toGame',function(data){
+        console.log("2 ok");
+        newGame();
+      });
+      socket.on('board',function(data){
+        enemyRender(data);
+      });
+      socket.on('attack',function(data){
+        attackedCounter++;
+      });
+      socket.on('end',function(data){
+         winnerImage();
+          stopTimer();
+        $("#getStart").prop("disabled", false);
+        $("#getStart").fadeIn(2000);
+      });
+    });
+
+
+  </script>
+
+    <script src='./js/tetris.js'  type="text/javascript"></script>
+    <script src='./js/render.js'  type="text/javascript"></script>
+    <script src='./js/controller.js'  type="text/javascript"></script>
+    <script src='./js/emitprocess.js'></script>
+    <script src='./js/enemyRender.js'></script>
+    <script src='./js/attack.js'></script>
+    <script src='./js/judge.js'></script>
+  </body>
+</html>

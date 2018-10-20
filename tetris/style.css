@@ -1,0 +1,30 @@
+canvas.main{
+  display: block;
+  width: 300px;
+  margin: auto;
+  border: 1px solid black;
+  float: left;
+  margin: 0 20px;
+}
+
+#counter{
+  width:101px;
+
+}
+
+.overhidden {
+  width:800px;
+  margin:auto;
+  overflow: hidden;
+}
+
+#counter {
+float:left;
+}
+
+#nextShape{
+
+ /* margin: 0; */
+
+
+}
