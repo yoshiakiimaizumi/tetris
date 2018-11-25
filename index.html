@@ -9,9 +9,10 @@
   <body class="bg-image-loop">
 	<script src='/socket.io/socket.io.js' type="text/javascript"></script>
     <!--   勝利判定の画像 -->
-    <img class="win" src="images/WIN.png" width="700" heigth="700" alt="win">
-    <img class="lose" src="images/LOSE.png" width="700" heigth="700" alt="win">
-    <!--   勝利判定の画像 end -->
+    <img class="win" src="images/WIN.png" width="700" heigth="357" alt="win">
+    <img class="lose" src="images/LOSE.png" width="700" heigth="357" alt="lose">
+    <img class="wait" src="images/wait.png" width="600" alt="wait">
+    <!--   勝利判定の画像 end -->s
    
   <div class="overhidden">
 		
@@ -30,7 +31,7 @@
         		<div class="myMedicenBox"></div>
         	</div>
         	</div>
-      	<div class="twoStart">
+      	<div class="startSwich">
         	<button id="getStart">TWO</button>
 			<button id="getStartOne">ONE</button>
         </div>
@@ -48,6 +49,7 @@
         console.log("1 ok");
         $("#getStart").prop("disabled", true);
         $("#getStart").fadeOut(1000);
+        waitImage()
         socket.emit('aikotoba','start');
       });
       socket.on('toGame',function(data){

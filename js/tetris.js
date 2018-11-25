@@ -333,9 +333,9 @@ function newGame() {
   renderInterval = setInterval(render,20);
   emitInterval = setInterval(myInfo,20);
   attackedCounter = 0;
-
   $(".win").hide();
   $(".lose").hide();
+  $(".wait").hide().
 
 }
 

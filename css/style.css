@@ -23,12 +23,6 @@ canvas.main{
 	box-sizing: border-box;
 }
 
-
-.timmer{
-	margin:auto;
-  /*float:left;*/
-}
-
 .contentBox{
 	overflow:hidden;
 	width:280px;
@@ -57,10 +51,6 @@ canvas.main{
   box-sizing: border-box;
 }
 
-.twoStart{
-	clear:both;
-}
-
 #getStart{
   float:left;
   background-color: #FFF;
@@ -70,7 +60,7 @@ canvas.main{
   box-sizing: border-box;
   text-align: center;
   padding:10px;
-  margin-top: 20px;
+  margin-top: 220px;
   margin-left: 20px;
   margin-right: 25px;
   border:solid 3px cornflowerblue;
@@ -95,7 +85,7 @@ canvas.main{
   box-sizing: border-box;
   text-align: center;
   padding:10px;
-  margin-top: 20px;
+  margin-top: 220px;
   margin-left: 16px;
   border:solid 3px cornflowerblue;
   border-radius: 5px;
@@ -110,8 +100,6 @@ canvas.main{
   text-shadow: -6px 0px 15px rgba(255, 255, 255, 0.83), 6px 0px 15px rgba(255, 255, 255, 0.83);
 }
 
-
-
 .overhidden {
   width:1000px;
   margin:auto;
@@ -124,6 +112,19 @@ body{
   font-family: 'Fascinate Inline', cursive;
 }
 
+.bg-image-loop{
+  position: relative;
+  overflow: hidden;
+  background-image: url("../images/background.png");
+    background-size:auto 65%;
+  animation: bg-slider 50000s linear infinite;
+}
+
+@keyframes bg-slider {
+	from { background-position: 0 0; }
+    to { background-position: -1366000px -870000px; }
+}
+/*エフェクト画像*/
 .win{
 position: absolute;
 top: 0;
@@ -144,15 +145,14 @@ margin: auto;
 display:none;
 }
 
-.bg-image-loop{
-  position: relative;
-  overflow: hidden;
-  background-image: url("../images/background.png");
-    background-size:auto 65%;
-  animation: bg-slider 50000s linear infinite;
+.wait{
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+margin: auto;
+margin-right:-630px;
+display:none;
 }
 
-@keyframes bg-slider {
-	from { background-position: 0 0; }
-    to { background-position: -1366000px -870000px; }
-}
