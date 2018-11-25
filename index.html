@@ -14,21 +14,30 @@
     <!--   勝利判定の画像 end -->
    
   <div class="overhidden">
-		 <div class="enemyInfo">
-			  <canvas id="nextShape"></canvas>
-			  <div class="enemyMedicenBox"></div>
-	     </div>
-		 <canvas  class ="main" id = "enemydisp" width="300" height="600"></canvas>
-         	<div class="content">
-          	     <div id="counter">TIMER</div>
-				 <button id="getStart">TETLE</button>
+		
+    <canvas  class ="main" id = "enemydisp" width="300" height="600"></canvas>
+    <div class="contentBox">
+        <div class="timmer">
+        	<div id="counter">TIMER</div>
+        </div>
+        <div class="information">
+        	<div class="enemyInfo">
+        		<canvas id="nextShape"></canvas>
+          		<div class="enemyMedicenBox"></div>
+       		</div>
+        	<div class="myInfo">
+        		<canvas id="nextShape"></canvas>
+        		<div class="myMedicenBox"></div>
         	</div>
+        	</div>
+      	<div class="twoStart">
+        	<button id="getStart">TWO</button>
+			<button id="getStartOne">ONE</button>
+        </div>
+    </div>
 		 <canvas class ="main" id = "mydisp" width="300" height="600"></canvas>
-    <div class="myInfo">
-			  <canvas id="nextShape"></canvas>
-			  <div class="myMedicenBox"></div>
-		  </div>
-   	  </div>
+   		
+  </div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>

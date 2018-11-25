@@ -10,28 +10,35 @@ canvas.main{
 }
 
 .enemyInfo,.myInfo{
-	overflow:hidden;
 	float:left;
 }
 
 .enemyMedicenBox,.myMedicenBox{
-	width:95px;
+	width:100px;
 	height:40px;
 	margin: 0 20px;
 	border-radius: 5px;
 	border: solid 3px #6CCCAA;
 	background-color: #FFF;
+	box-sizing: border-box;
 }
 
 
-.content{
-  float:left;
+.timmer{
+	margin:auto;
+  /*float:left;*/
+}
+
+.contentBox{
+	overflow:hidden;
+	width:280px;
+	float:left;
 }
 
 #counter{
   width:100px;
   padding:10px;
-  margin: 15px 15px;
+  margin: 15px auto;
   background-color: #FFF;
   border: solid 3px cornflowerblue;
   border-radius: 5px;
@@ -40,21 +47,52 @@ canvas.main{
 }
 
 #nextShape{
-  width:65px;
-  height: auto;
+  width:100px;
+  height:150px; 
   background-color: #FFF;
   border: solid 3px cornflowerblue;
   border-radius: 5px;
   padding: 15px;
   margin: 20px 20px;
+  box-sizing: border-box;
 }
 
-button{
+.twoStart{
+	clear:both;
+}
+
+#getStart{
   float:left;
   background-color: #FFF;
   color:#5160D8;
   font-size:25px;
-  width:126px;
+  width:100px;
+  box-sizing: border-box;
+  text-align: center;
+  padding:10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 25px;
+  border:solid 3px cornflowerblue;
+  border-radius: 5px;
+  font-family: 'Fascinate Inline', cursive;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.73);
+  transition: .5s;
+}
+
+#getStart:hover{
+  background-color: cornflowerblue;
+  color:#F575E5;
+  text-shadow: -6px 0px 15px rgba(255, 255, 255, 0.83), 6px 0px 15px rgba(255, 255, 255, 0.83);
+}
+
+#getStartOne{
+  float:left;
+  background-color: #FFF;
+  color:#5160D8;
+  font-size:25px;
+  width:100px;
+  box-sizing: border-box;
   text-align: center;
   padding:10px;
   margin-top: 20px;
@@ -66,14 +104,16 @@ button{
   transition: .5s;
 }
 
-button:hover{
+#getStartOne:hover{
   background-color: cornflowerblue;
-  color:#F575E5;
+  color:#F58F1C;
   text-shadow: -6px 0px 15px rgba(255, 255, 255, 0.83), 6px 0px 15px rgba(255, 255, 255, 0.83);
 }
 
+
+
 .overhidden {
-  width:1200px;
+  width:1000px;
   margin:auto;
   overflow: hidden;
 }
