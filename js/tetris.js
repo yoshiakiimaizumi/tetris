@@ -335,7 +335,7 @@ function newGame() {
   attackedCounter = 0;
   $(".win").hide();
   $(".lose").hide();
-  $(".wait").hide().
+  $(".wait").hide();
 
 }
 

@@ -40,4 +40,3 @@ function rectWait() {
     }, 0)
     setTimeout("rectWait()", 3000);//アニメーションを繰り返す間隔
 }
-透過率を変
