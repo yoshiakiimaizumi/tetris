@@ -2,3 +2,13 @@
 # https://help.github.com/articles/ignoring-files
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
+/node_modules/
+/node.exe
+/node_etw_provider.man
+/node_perfctr_provider.man
+/nodevars.bat
+/npm
+/npm.cmd
+/npx
+/npx.cmd
+/package-lock.json
