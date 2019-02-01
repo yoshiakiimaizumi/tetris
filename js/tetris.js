@@ -113,18 +113,18 @@ function tick() {
     clearLines();  // ライン消去処理
     //ブロックが着地するまでグレイのラインが出ないようにする。
     if(mAfter){
-      addOneLine();
+      addOneLine(8);
       mAfter=false;
     }
     //自分の消したライン分、相手にラインを送れる
-    if(attackedCounter > 0){
+    if(attackedCounter > 0 && isVS){
       for(var i = 0; i < attackedCounter ; ++i){
         upLineForAttacked();
       }
       attackedCounter = 0;
     }
     //ゲームオーバーになった時
-    if (lose) {
+    if (lose && isVS) {
       //負けた人様の画像
       loserImage();
       //相手に負けたことを送る
@@ -233,6 +233,12 @@ function keyPress(key) {
       var rotated = rotate(current);
       if (valid(0,0,rotated)) {
         current = rotated;//回せる場合は回したあとの状態に操作ブロックをセットする。
+      }else if(valid(1,0,rotated)){
+    	  current = rotated;
+    	  ++currentX;
+      }else if(valid(-1,0,rotated)){
+    	  current = rotated;
+    	  --currentX;
       }
 //      else{
 //        if(rotated[0][0] !== 0 || rotated[0][1] !== 0 ||rotated[0][2] !== 0 || rotated[0][3] !== 0){
@@ -334,8 +340,13 @@ function newGame(vsOrNot) {
 	timerCount = setInterval( timer,1000 ); //
 	beforeMinutes = 0;
 	renderInterval = setInterval(render,20);
+<<<<<<< HEAD
 	
 	if(isVS){}
+=======
+	console.log("new Game");
+	if(isVS){
+>>>>>>> branch 'dev' of https://github.com/yoshiakiimaizumi/tetris.git
 		lose = false; //負けフラグ
 		emitInterval = setInterval(myInfo,20);
 		attackedCounter = 0;
@@ -346,7 +357,11 @@ function newGame(vsOrNot) {
 }
 
 function myGame(){
+<<<<<<< HEAD
 	new newGame(false);
+=======
+	new newGame(false);console.log("myGame");
+>>>>>>> branch 'dev' of https://github.com/yoshiakiimaizumi/tetris.git
 }
 
 function stopTimer(){
