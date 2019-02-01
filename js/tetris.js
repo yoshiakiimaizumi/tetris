@@ -12,6 +12,7 @@ var currentColor;
 var mAfter = false;
 var renderInterval ;
 var emitInterval;
+var isVS;
 
 //操作するブロックのパターン
 ////空のマスは0, 色のマスは1以上としてセット
@@ -186,7 +187,7 @@ function clearLines() {
         break;
       }
     }
-    //もし一行そろっていたらその行を消す。
+    //一行確認し、もし空白マスがなければその行を消す(不可ブロックは除く)
     if (rowFilled && board[y][0] !== 8) {
       if(board[y][0] === 9){
         pinkAttack()
@@ -291,21 +292,23 @@ function valid ( offsetX, offsetY, newCurrent ) {
   return true;
 }
 
-//タイマー
+//ゲームの経過時間タイマー　1秒ごとに起動
 function timer() {
-  var t = Date.now() - startTime
-  var t2 = new Date(t);
-  var minutes = t2.getMinutes();
-  var seconds  = t2.getSeconds();
-
+  let t = Date.now() - startTime
+  let playTime = new Date(t);
+  let minutes = playTime.getMinutes();
+  let seconds  = playTime.getSeconds();
   document.getElementById("counter").textContent = minutes + '分' + seconds + '秒' ;
 
+  //1分ごとの処理（不可ブロック一段追加）
   if(beforeMinutes+1 === minutes){
       beforeMinutes++;
       mAfter = true;
   }
 }
-function addOneLine(){
+
+//指定ブロックの一行追加処理
+function addOneLine(blockNumber){
   var minutes = 1;
   for(var y = 0; y < ROWS-minutes ; ++y){
     for(var x = 0; x < COLS; ++x){
@@ -314,29 +317,36 @@ function addOneLine(){
   }
   for(var i = 0; i < minutes; ++i){
     for(x = 0; x < COLS; ++x){
-      board[ROWS-1-i][x] = 8;
+      board[ROWS-1-i][x] = blockNumber;
     }
   }
 }
 
 //new game 画面を呼びだす
-function newGame() {
-  clearInterval(interval); //ゲームタイマーをクリア
-  clearInterval(timerCount);
-  init(); //盤面をリセット
-  newShape(); //操作ブロックをセット
-  lose = false; //負けフラグ
-  interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
-  startTime = Date.now();
-  timerCount = setInterval( timer,1000 ); //
-  beforeMinutes = 0;
-  renderInterval = setInterval(render,20);
-  emitInterval = setInterval(myInfo,20);
-  attackedCounter = 0;
-  $(".win").hide();
-  $(".lose").hide();
-  $(".wait").hide().
+function newGame(vsOrNot) {
+	isVS = vsOrNot;
+	clearInterval(interval); //ゲームタイマーをクリア
+	clearInterval(timerCount);
+	init(); //盤面をリセット
+	newShape(); //操作ブロックをセット
+	interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
+	startTime = Date.now();
+	timerCount = setInterval( timer,1000 ); //
+	beforeMinutes = 0;
+	renderInterval = setInterval(render,20);
+	
+	if(isVS){}
+		lose = false; //負けフラグ
+		emitInterval = setInterval(myInfo,20);
+		attackedCounter = 0;
+	}
+	$(".win").hide();
+	$(".lose").hide();
+	$(".wait").hide();
+}
 
+function myGame(){
+	new newGame(false);
 }
 
 function stopTimer(){
