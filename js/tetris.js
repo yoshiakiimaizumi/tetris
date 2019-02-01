@@ -340,13 +340,7 @@ function newGame(vsOrNot) {
 	timerCount = setInterval( timer,1000 ); //
 	beforeMinutes = 0;
 	renderInterval = setInterval(render,20);
-<<<<<<< HEAD
-	
-	if(isVS){}
-=======
-	console.log("new Game");
 	if(isVS){
->>>>>>> branch 'dev' of https://github.com/yoshiakiimaizumi/tetris.git
 		lose = false; //負けフラグ
 		emitInterval = setInterval(myInfo,20);
 		attackedCounter = 0;
@@ -357,11 +351,7 @@ function newGame(vsOrNot) {
 }
 
 function myGame(){
-<<<<<<< HEAD
-	new newGame(false);
-=======
 	new newGame(false);console.log("myGame");
->>>>>>> branch 'dev' of https://github.com/yoshiakiimaizumi/tetris.git
 }
 
 function stopTimer(){
