@@ -12,6 +12,7 @@ var currentColor;
 var mAfter = false;
 var renderInterval ;
 var emitInterval;
+var isVS;
 
 //操作するブロックのパターン
 ////空のマスは0, 色のマスは1以上としてセット
@@ -112,18 +113,18 @@ function tick() {
     clearLines();  // ライン消去処理
     //ブロックが着地するまでグレイのラインが出ないようにする。
     if(mAfter){
-      addOneLine();
+      addOneLine(8);
       mAfter=false;
     }
     //自分の消したライン分、相手にラインを送れる
-    if(attackedCounter > 0){
+    if(attackedCounter > 0 && isVS){
       for(var i = 0; i < attackedCounter ; ++i){
         upLineForAttacked();
       }
       attackedCounter = 0;
     }
     //ゲームオーバーになった時
-    if (lose) {
+    if (lose && isVS) {
       //負けた人様の画像
       loserImage();
       //相手に負けたことを送る
@@ -186,7 +187,7 @@ function clearLines() {
         break;
       }
     }
-    //もし一行そろっていたらその行を消す。
+    //一行確認し、もし空白マスがなければその行を消す(不可ブロックは除く)
     if (rowFilled && board[y][0] !== 8) {
       if(board[y][0] === 9){
         pinkAttack()
@@ -232,6 +233,12 @@ function keyPress(key) {
       var rotated = rotate(current);
       if (valid(0,0,rotated)) {
         current = rotated;//回せる場合は回したあとの状態に操作ブロックをセットする。
+      }else if(valid(1,0,rotated)){
+    	  current = rotated;
+    	  ++currentX;
+      }else if(valid(-1,0,rotated)){
+    	  current = rotated;
+    	  --currentX;
       }
 //      else{
 //        if(rotated[0][0] !== 0 || rotated[0][1] !== 0 ||rotated[0][2] !== 0 || rotated[0][3] !== 0){
@@ -291,21 +298,23 @@ function valid ( offsetX, offsetY, newCurrent ) {
   return true;
 }
 
-//タイマー
+//ゲームの経過時間タイマー　1秒ごとに起動
 function timer() {
-  var t = Date.now() - startTime
-  var t2 = new Date(t);
-  var minutes = t2.getMinutes();
-  var seconds  = t2.getSeconds();
-
+  let t = Date.now() - startTime
+  let playTime = new Date(t);
+  let minutes = playTime.getMinutes();
+  let seconds  = playTime.getSeconds();
   document.getElementById("counter").textContent = minutes + '分' + seconds + '秒' ;
 
+  //1分ごとの処理（不可ブロック一段追加）
   if(beforeMinutes+1 === minutes){
       beforeMinutes++;
       mAfter = true;
   }
 }
-function addOneLine(){
+
+//指定ブロックの一行追加処理
+function addOneLine(blockNumber){
   var minutes = 1;
   for(var y = 0; y < ROWS-minutes ; ++y){
     for(var x = 0; x < COLS; ++x){
@@ -314,12 +323,13 @@ function addOneLine(){
   }
   for(var i = 0; i < minutes; ++i){
     for(x = 0; x < COLS; ++x){
-      board[ROWS-1-i][x] = 8;
+      board[ROWS-1-i][x] = blockNumber;
     }
   }
 }
 
 //new game 画面を呼びだす
+<<<<<<< HEAD
 function newGame() {
   clearInterval(interval); //ゲームタイマーをクリア
   clearInterval(timerCount);
@@ -336,7 +346,31 @@ function newGame() {
   $(".win").hide();
   $(".lose").hide();
   $(".wait").hide();
+=======
+function newGame(vsOrNot) {
+	isVS = vsOrNot;
+	clearInterval(interval); //ゲームタイマーをクリア
+	clearInterval(timerCount);
+	init(); //盤面をリセット
+	newShape(); //操作ブロックをセット
+	interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
+	startTime = Date.now();
+	timerCount = setInterval( timer,1000 ); //
+	beforeMinutes = 0;
+	renderInterval = setInterval(render,20);
+	if(isVS){
+		lose = false; //負けフラグ
+		emitInterval = setInterval(myInfo,20);
+		attackedCounter = 0;
+	}
+	$(".win").hide();
+	$(".lose").hide();
+	$(".wait").hide();
+}
+>>>>>>> 25d2ec94ef725fd3f6f73a932bd4c146a149e053
 
+function myGame(){
+	new newGame(false);console.log("myGame");
 }
 
 function stopTimer(){
