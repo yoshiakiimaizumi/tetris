@@ -329,6 +329,24 @@ function addOneLine(blockNumber){
 }
 
 //new game 画面を呼びだす
+<<<<<<< HEAD
+function newGame() {
+  clearInterval(interval); //ゲームタイマーをクリア
+  clearInterval(timerCount);
+  init(); //盤面をリセット
+  newShape(); //操作ブロックをセット
+  lose = false; //負けフラグ
+  interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
+  startTime = Date.now();
+  timerCount = setInterval( timer,1000 ); //
+  beforeMinutes = 0;
+  renderInterval = setInterval(render,20);
+  emitInterval = setInterval(myInfo,20);
+  attackedCounter = 0;
+  $(".win").hide();
+  $(".lose").hide();
+  $(".wait").hide();
+=======
 function newGame(vsOrNot) {
 	isVS = vsOrNot;
 	clearInterval(interval); //ゲームタイマーをクリア
@@ -349,6 +367,7 @@ function newGame(vsOrNot) {
 	$(".lose").hide();
 	$(".wait").hide();
 }
+>>>>>>> 25d2ec94ef725fd3f6f73a932bd4c146a149e053
 
 function myGame(){
 	new newGame(false);console.log("myGame");
