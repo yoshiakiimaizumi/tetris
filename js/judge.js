@@ -39,9 +39,5 @@ function rectWait() {
         right: "-630px"　//要素を戻す位置
     }, 0)
     setTimeout("rectWait()", 3000);//アニメーションを繰り返す間隔
-<<<<<<< HEAD
-}
-=======
 }
 //透過率を変
->>>>>>> 25d2ec94ef725fd3f6f73a932bd4c146a149e053
