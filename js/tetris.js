@@ -212,6 +212,7 @@ function clearLines() {
 
 //キーボードが押された時に呼び出される関数
 
+let poseFlag = false;
 function keyPress(key) {
   switch(key) {
     case 'left':
@@ -240,23 +241,21 @@ function keyPress(key) {
     	  current = rotated;
     	  --currentX;
       }
-//      else{
-//        if(rotated[0][0] !== 0 || rotated[0][1] !== 0 ||rotated[0][2] !== 0 || rotated[0][3] !== 0){
-//          for(var j = 1 ; j <= 3 ; ++j){
-//            if(valid(j,0)){
-//              console.log('left ');
-//            }
-//          }
-//        }else{
-//          for(var i = -1 ; i >= -3 ; --i){
-//             if(valid(i,0)){
-//              console.log('right ');
-//            }
-//          }
-//        }
-//     }
-
       break;
+      case 'pose':
+        //poseBtnが押されていない(pose)
+        if(!poseFlag){
+      　  stopTimer();
+          poseFlag = true;
+          socket.emit('pose','winner');
+
+        }
+        
+        //poseBtnが押されている(pose解除)
+        if(poseFlag){
+
+        }
+
   }
 }
 
@@ -329,24 +328,6 @@ function addOneLine(blockNumber){
 }
 
 //new game 画面を呼びだす
-<<<<<<< HEAD
-function newGame() {
-  clearInterval(interval); //ゲームタイマーをクリア
-  clearInterval(timerCount);
-  init(); //盤面をリセット
-  newShape(); //操作ブロックをセット
-  lose = false; //負けフラグ
-  interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
-  startTime = Date.now();
-  timerCount = setInterval( timer,1000 ); //
-  beforeMinutes = 0;
-  renderInterval = setInterval(render,20);
-  emitInterval = setInterval(myInfo,20);
-  attackedCounter = 0;
-  $(".win").hide();
-  $(".lose").hide();
-  $(".wait").hide();
-=======
 function newGame(vsOrNot) {
 	isVS = vsOrNot;
 	clearInterval(interval); //ゲームタイマーをクリア
@@ -367,7 +348,6 @@ function newGame(vsOrNot) {
 	$(".lose").hide();
 	$(".wait").hide();
 }
->>>>>>> 25d2ec94ef725fd3f6f73a932bd4c146a149e053
 
 function myGame(){
 	new newGame(false);console.log("myGame");
@@ -378,4 +358,11 @@ function stopTimer(){
    clearInterval(timerCount);
    clearInterval(renderInterval);
    clearInterval(emitInterval);
+}
+
+function stopTimer(){
+  clearInterval(interval);
+  clearInterval(timerCount);
+  clearInterval(renderInterval);
+  clearInterval(emitInterval);
 }
