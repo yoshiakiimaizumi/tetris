@@ -63,6 +63,9 @@
       socket.on('attack',function(data){
         attackedCounter++;
       });
+      socket.on('pose',function(data){
+        pose(data);
+      });
       socket.on('end',function(data){
          winnerImage();
           stopTimer();

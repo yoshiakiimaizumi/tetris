@@ -212,7 +212,7 @@ function clearLines() {
 
 //キーボードが押された時に呼び出される関数
 
-let poseFlag = false;
+var poseFlag = false;
 function keyPress(key) {
   switch(key) {
     case 'left':
@@ -242,22 +242,32 @@ function keyPress(key) {
     	  --currentX;
       }
       break;
-      case 'pose':
+    case 'pose':
         //poseBtnが押されていない(pose)
-        if(!poseFlag){
-      　  stopTimer();
-          poseFlag = true;
-          socket.emit('pose','winner');
-
-        }
-        
-        //poseBtnが押されている(pose解除)
-        if(poseFlag){
-
-        }
-
+      if(!poseFlag){
+        pose(true);
+        socket.emit('pose',true);
+        console.log(poseFlag);
+        console.log("stop");
+      }else{//poseBtnが押されている(pose解除)
+        pose(false);
+        socket.emit('pose',false);
+        console.log(poseFlag);
+        console.log("start");
+      }
   }
 }
+
+function pose(flag){
+  if(flag){
+    stopTimer();
+    poseFlag = true;
+  }else{
+    startTimer();
+    poseFlag = false;
+  }
+}
+
 
 //指定された方向に、操作ブロックが動かせるかどうかチェックする。
 //ゲームオーバー判定もここで行う
@@ -360,9 +370,9 @@ function stopTimer(){
    clearInterval(emitInterval);
 }
 
-function stopTimer(){
-  clearInterval(interval);
-  clearInterval(timerCount);
-  clearInterval(renderInterval);
-  clearInterval(emitInterval);
+function startTimer(){
+  interval = setInterval( tick,500 );
+  timerCount = setInterval( timer,1000 ); 
+  renderInterval = setInterval(render,20)
+  emitInterval = setInterval(myInfo,20)
 }

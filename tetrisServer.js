@@ -156,7 +156,7 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on('pose',function(data){
     //console.log(data);
-    io.to(battleMap.get(socket.id)).emit('pose', '');
+    io.to(battleMap.get(socket.id)).emit('pose',data);
   });
   socket.on('end',function(data){
     //console.log(data);
