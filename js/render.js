@@ -77,7 +77,7 @@ function render() {
     for(var x = 0; x < 4; ++x){
       if(current[y][x]){
         ib = imageBlocks[current[y][x]-1];//マスの種類に合わせて塗りつぶす色を設定する
-        console.log(current[y][x]-1);
+        //console.log(current[y][x]-1);
         drawImages(ib,currentX + x,currentY + y); //マスの描写
 
 //        ctx.fillStyle = colors[current[y][x] -1];//マスの種類に合わせて塗りつぶす色を設定

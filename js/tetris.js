@@ -140,7 +140,7 @@ function tick() {
     //console.log(socket); デバック
   }
   //操作状態の盤面情報を一次配列に変えて相手に送る
-  socket.emit('board',toOneDimention(board));
+  //socket.emit('board',toOneDimention(board));
 }
 
 //操作ブロックを盤面へセットする関数。
@@ -358,7 +358,9 @@ function newGame(vsOrNot) {
 	$(".lose").hide();
 	$(".wait").hide();
 }
-
+function test1(){
+  console.log("test1");
+}
 function myGame(){
 	new newGame(false);console.log("myGame");
 }
@@ -373,6 +375,6 @@ function stopTimer(){
 function startTimer(){
   interval = setInterval( tick,500 );
   timerCount = setInterval( timer,1000 ); 
-  renderInterval = setInterval(render,20)
-  emitInterval = setInterval(myInfo,20)
+  renderInterval = setInterval(render,20);
+  emitInterval = setInterval(myInfo,20);
 }
