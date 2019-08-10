@@ -3,9 +3,9 @@ var enemyCanvas = document.getElementById('enemydisp'); //canvas
 var ctxE = enemyCanvas.getContext('2d'); //コンテクスト
 
 function enemyRender(data){
-  var boardData = data;
+  //var boardData = data;
 
-  enemyBoard = toTwoDimention(boardData,COLS,ROWS);
+  enemyBoard = data;//toTwoDimention(boardData,COLS,ROWS);
   //console.log("yaya" + enemyBoard[1])
 //  enemyBoard = board;
   renderE()

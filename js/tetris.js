@@ -140,7 +140,7 @@ function tick() {
     //console.log(socket); デバック
   }
   //操作状態の盤面情報を一次配列に変えて相手に送る
-  socket.emit('board',toOneDimention(board));
+  //socket.emit('board',toOneDimention(board));
 }
 
 //操作ブロックを盤面へセットする関数。
@@ -175,7 +175,6 @@ function rotate(current) {
 //①一行そろっている場所を調べる。
 //②そろっていたらその上にあったブロックを１つずつ下へずらす。(消去)
 //一行そろっているかどうかはrowFilled変数に代入する。
-
 //一行そろっているか調べ、そろっていたらその行を消す
 function clearLines() {
   for (var y = ROWS - 1; y >= 0; --y) {
@@ -202,16 +201,15 @@ function clearLines() {
       ++y; //一行落とした為、チェック処理を１つ下へ送る
     }
   }
-
 }
 
 //キーボードが押された時の処理
 //上が押された時は回転。
 //それ以外の時はその方向へ操作ブロックをずらす。
 //ずらす場合はvalid処理をはさむ。
-
 //キーボードが押された時に呼び出される関数
 
+var poseFlag = false;
 function keyPress(key) {
   switch(key) {
     case 'left':
@@ -240,23 +238,30 @@ function keyPress(key) {
     	  current = rotated;
     	  --currentX;
       }
-//      else{
-//        if(rotated[0][0] !== 0 || rotated[0][1] !== 0 ||rotated[0][2] !== 0 || rotated[0][3] !== 0){
-//          for(var j = 1 ; j <= 3 ; ++j){
-//            if(valid(j,0)){
-//              console.log('left ');
-//            }
-//          }
-//        }else{
-//          for(var i = -1 ; i >= -3 ; --i){
-//             if(valid(i,0)){
-//              console.log('right ');
-//            }
-//          }
-//        }
-//     }
-
       break;
+    case 'pose':
+        //poseBtnが押されていない(pose)
+      if(!poseFlag){
+        pose(true);
+        socket.emit('pose',true);
+        console.log(poseFlag);
+        console.log("stop");
+      }else{//poseBtnが押されている(pose解除)
+        pose(false);
+        socket.emit('pose',false);
+        console.log(poseFlag);
+        console.log("start");
+      }
+  }
+}
+
+function pose(flag){
+  if(flag){
+    stopTimer();
+    poseFlag = true;
+  }else{
+    startTimer();
+    poseFlag = false;
   }
 }
 
@@ -359,4 +364,11 @@ function stopTimer(){
    clearInterval(timerCount);
    clearInterval(renderInterval);
    clearInterval(emitInterval);
+}
+
+function startTimer(){
+  interval = setInterval( tick,500 );
+  timerCount = setInterval( timer,1000 ); 
+  renderInterval = setInterval(render,20);
+  emitInterval = setInterval(myInfo,20);
 }

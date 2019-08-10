@@ -1,6 +1,7 @@
 //操作処理
 
-//document.body.onkeydownというものに関数を指定した場合、どれかキーボードが押された場合に呼び出される。押されたキーボードの種類は数字としてe.keyCodeに代入される。
+//document.body.onkeydownというものに関数を指定した場合、どれかキーボードが押された場合に呼び出される。
+//押されたキーボードの種類は数字としてe.keyCodeに代入される。
 
 //矢印キーの番号に名前をつけていく。
 //これらのキーのどれかが押された場合はkeyPressという関数を呼び出していく。
@@ -16,7 +17,8 @@ document.body.onkeydown = function (e) {
     37: 'left',
     39: 'right',
     40: 'down',
-    38: 'rotate'
+    38: 'rotate',
+    80: 'pose'
   };
 
   if (typeof keys[e.keyCode] !== 'undefind') {
