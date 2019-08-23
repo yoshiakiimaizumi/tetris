@@ -261,9 +261,11 @@ function keyPress(key) {
 function pose(flag){
   if(flag){
     stopTimer();
+    poseShow();
     poseFlag = true;
   }else{
     startTimer();
+    poseHide();
     poseFlag = false;
   }
 }
