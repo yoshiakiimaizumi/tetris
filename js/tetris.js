@@ -256,9 +256,11 @@ function keyPress(key) {
 function pose(flag){
   if(flag){
     stopTimer();
+    poseShow();
     poseFlag = true;
   }else{
     startTimer();
+    poseHide();
     poseFlag = false;
   }
 }
@@ -357,7 +359,8 @@ function test1(){
   console.log("test1");
 }
 function myGame(){
-	new newGame(false);console.log("myGame");
+  new newGame(false);
+  console.log("myGame");
 }
 
 //タイマー関数
@@ -369,8 +372,8 @@ function stopTimer(){
 }
 
 function startTimer(){
-  interval = setInterval( tick,500 );
-  timerCount = setInterval( timer,1000 ); 
-  renderInterval = setInterval(render,20);
-  emitInterval = setInterval(myInfo,20);
+  interval = setInterval(tick,500);
+  timerCount = setInterval(timer,1000); 
+  renderInterval = setInterval(render,20)
+  emitInterval = setInterval(myInfo,20)
 }
