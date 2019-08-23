@@ -40,15 +40,11 @@ var isVS;
 ];
 //ブロックの色
  colors = [
-  'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple', 'black','pink'
+  'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple', 'stone','pink','heart'
 ];
 
 //最後に盤面の上にくるよう位置をセット
-
-
-
 //shapeからのランダムにブロックのパターンに出力し、盤面の一番上へセットする。
-
 //shapesからランダムにパターンを取り出し、currentにコピー(セット)していく。
 function newShape() {
   'use strict';
@@ -113,7 +109,7 @@ function tick() {
     clearLines();  // ライン消去処理
     //ブロックが着地するまでグレイのラインが出ないようにする。
     if(mAfter){
-      addOneLine(8);
+      addStoneLine(8);
       mAfter=false;
     }
     //自分の消したライン分、相手にラインを送れる
@@ -207,8 +203,12 @@ function clearLines() {
 //上が押された時は回転。
 //それ以外の時はその方向へ操作ブロックをずらす。
 //ずらす場合はvalid処理をはさむ。
+<<<<<<< HEAD
 //キーボードが押された時に呼び出される関数
 
+=======
+//ポーズする時はpoesFlagで条件分岐を行う。
+>>>>>>> dev
 var poseFlag = false;
 function keyPress(key) {
   switch(key) {
@@ -255,19 +255,23 @@ function keyPress(key) {
   }
 }
 
+//poseFlagの操作
 function pose(flag){
   if(flag){
     stopTimer();
+    poseShow();
     poseFlag = true;
   }else{
     startTimer();
+    poseHide();
     poseFlag = false;
   }
 }
 
 //指定された方向に、操作ブロックが動かせるかどうかチェックする。
 //ゲームオーバー判定もここで行う
-//基本的に現在の操作ブロックがその方向(offsetX, offsetY)に動いたら、というものを判定だが、newCurrentという引数を取った場合、そのブロックがその方向に動いたら、というものをする。
+//基本的に現在の操作ブロックがその方向(offsetX, offsetY)に動いたら、というものを判定だが、
+//newCurrentという引数を取った場合、そのブロックがその方向に動いたら、というものをする。
 
 //以下の場合falseを返し、そうでない場合はtrueを返します。
 
@@ -309,7 +313,7 @@ function timer() {
   let playTime = new Date(t);
   let minutes = playTime.getMinutes();
   let seconds  = playTime.getSeconds();
-  document.getElementById("counter").textContent = minutes + '分' + seconds + '秒' ;
+  document.getElementById("counter").textContent = minutes + ':' + seconds;
 
   //1分ごとの処理（不可ブロック一段追加）
   if(beforeMinutes+1 === minutes){
@@ -319,7 +323,7 @@ function timer() {
 }
 
 //指定ブロックの一行追加処理
-function addOneLine(blockNumber){
+function addStoneLine(blockNumber){
   var minutes = 1;
   for(var y = 0; y < ROWS-minutes ; ++y){
     for(var x = 0; x < COLS; ++x){
@@ -356,9 +360,11 @@ function newGame(vsOrNot) {
 }
 
 function myGame(){
-	new newGame(false);console.log("myGame");
+  new newGame(false);
+  console.log("myGame");
 }
 
+//タイマー関数
 function stopTimer(){
    clearInterval(interval);
    clearInterval(timerCount);
@@ -367,8 +373,8 @@ function stopTimer(){
 }
 
 function startTimer(){
-  interval = setInterval( tick,500 );
-  timerCount = setInterval( timer,1000 ); 
-  renderInterval = setInterval(render,20);
-  emitInterval = setInterval(myInfo,20);
+  interval = setInterval(tick,500);
+  timerCount = setInterval(timer,1000); 
+  renderInterval = setInterval(render,20)
+  emitInterval = setInterval(myInfo,20)
 }
