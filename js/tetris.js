@@ -360,7 +360,9 @@ function newGame(vsOrNot) {
 	$(".lose").hide();
 	$(".wait").hide();
 }
-
+function test1(){
+  console.log("test1");
+}
 function myGame(){
   new newGame(false);
   console.log("myGame");
