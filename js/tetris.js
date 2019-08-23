@@ -140,7 +140,7 @@ function tick() {
     //console.log(socket); デバック
   }
   //操作状態の盤面情報を一次配列に変えて相手に送る
-  socket.emit('board',toOneDimention(board));
+  //socket.emit('board',toOneDimention(board));
 }
 
 //操作ブロックを盤面へセットする関数。
@@ -261,10 +261,8 @@ function keyPress(key) {
 function pose(flag){
   if(flag){
     stopTimer();
-    poseShow();
     poseFlag = true;
   }else{
-    poseHide();
     startTimer();
     poseFlag = false;
   }
