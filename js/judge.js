@@ -37,7 +37,7 @@ function waitImage(){
 function rectWait() {
     $(".wait").animate({
         right: "2000px" //要素を動かす位置
-    }, 6000,'liner').animate({
+    }, 6000).animate({
         right: "-630px"　//要素を戻す位置
     }, 0)
     setTimeout("rectWait()", 3000);//アニメーションを繰り返す間隔
@@ -46,8 +46,10 @@ function rectWait() {
 //ポーズ判定
 function poseShow(){
     $(".pose").show();
+    console.log("show");
 }
-
 function poseHide(){
     $(".pose").hide();
+    console.log("hide");
+
 }
