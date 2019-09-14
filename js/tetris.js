@@ -13,6 +13,9 @@ var mAfter = false;
 var renderInterval ;
 var emitInterval;
 var isVS;
+var nextShape;//ランダムで選ばれた形・カラー設定されたもの
+let heartCount = 0;
+let maxItems = 4; //アイテム保持
 
 //操作するブロックのパターン
 ////空のマスは0, 色のマスは1以上としてセット
@@ -57,6 +60,36 @@ function newShape() {
 
   var shape = shapes[nextId];
 
+  if(nextShape == null){
+    nextShape = shapes[nextId];
+    let includeHeart = false;
+    for(let k = 0;k < nextShape.length; k++){
+      if(!nextShape[k]){
+        continue;
+      }
+      //heart
+      if(!includeHeart && Math.random()*10 < 2){
+        nextShape[k] = 10;
+        includeHeart = true;
+      }else{
+        nextShape[k]= nextId+1;
+      }
+    }
+  }
+  let includeHeart = false;
+  for(let k = 0;k < shape.length; k++){
+    if(!shape[k]){
+      continue;
+    }
+    //heart
+    if(!includeHeart && Math.random()*10 < 2){
+      shape[k] = 10;
+      includeHeart = true;
+    }else{
+      shape[k]= nextId+1;
+    }
+  }
+
   //操作ブロックは4 x 4マスの中で表現
   //パターンを操作ブロックへセットする
   current = [];
@@ -64,8 +97,12 @@ function newShape() {
     current[y] = [];
     for (var x = 0; x < 4; ++x) {
       var i = 4 * y + x;
-      if (typeof shape[i] != 'undefined' && shape[i]) {
-        current[y][x] = nextId + 1;
+      if (typeof nextShape[i] != 'undefined' && nextShape[i]) {
+        current[y][x] = nextShape[i];
+        //heart
+        // if(Math.random()*100 < 2){
+        //   current[y][x] = 9;
+        // }
       }
       else {
         current[y][x] = 0;
@@ -77,6 +114,7 @@ function newShape() {
   currentX = 3;
   currentY = 0;
   nextId = id;
+  nextShape = shape;
 }
 
 //盤面に関する関数　０：何もない　１～：ブロック
@@ -172,33 +210,86 @@ function rotate(current) {
 //②そろっていたらその上にあったブロックを１つずつ下へずらす。(消去)
 //一行そろっているかどうかはrowFilled変数に代入する。
 
+//削除予定
+// //一行そろっているか調べ、そろっていたらその行を消す
+// function clearLines2() {
+//   for (var y = ROWS - 1; y >= 0; --y) {
+//     var rowFilled = true;
+//     //一行がそろっているのか調べる
+//     for(var x = 0; x < COLS; ++x){
+//       if (board[y][x] == 0) {
+//         rowFilled = false;
+//         break;
+//       }
+//     }
+//     //一行確認し、もし空白マスがなければその行を消す(不可ブロック(8)は除く)
+//     if (rowFilled && board[y][0] !== 8) {
+//       //countLine(true)
+//       if(board[y][0] === 9){
+//         pinkAttack()
+//       }else{
+//         attack()
+//       }
+//       for (var yy = y; yy>0; --yy) {
+//         for ( x = 0; x < COLS; ++x) {
+//           if(board[yy - 1][x] === 10){
+//             heartCount === maxItems ? "" : heartCount++;
+//           }
+//           board[yy][x] = board[yy - 1][x];
+//         }
+//       }
+//       ++y; //一行落とした為、チェック処理を１つ下へ送る
+//     }
+//   }
+// //countLine(false)
+// }
+
 //一行そろっているか調べ、そろっていたらその行を消す
 function clearLines() {
+  var rowFilledCount = 0;
   for (var y = ROWS - 1; y >= 0; --y) {
-    var rowFilled = true;
     //一行がそろっているのか調べる
-    for(var x = 0; x < COLS; ++x){
-      if (board[y][x] == 0) {
-        rowFilled = false;
-        break;
-      }
+    if (!board[y].includes(0) && !board[y].includes(8)) {
+      rowFilledCount++;
+    }   
+  }
+  for(let i = 0; i < rowFilledCount; i++){
+    clearOneLine(true);
+  }
+//countLine(false)
+}
+
+//heart
+function clearOneLine(isIgnore){
+  for (var y = ROWS - 1; y >= 0; --y) {
+    var rowFilled = false;
+    //一行がそろっているのか調べる
+    if (!board[y].includes(0) && !board[y].includes(8)) {
+      rowFilled = true;
     }
-    //一行確認し、もし空白マスがなければその行を消す(不可ブロックは除く)
+    if(isIgnore){
+      rowFilled = true;
+    }
+    //一行確認し、もし空白マスがなければその行を消す(不可ブロック(8)は除く)
     if (rowFilled && board[y][0] !== 8) {
-      if(board[y][0] === 9){
+      //countLine(true)
+      if(board[y][0] === 9 || board[y][1] === 9){//ピンクは必ず９マスある為
         pinkAttack()
       }else{
         attack()
       }
       for (var yy = y; yy>0; --yy) {
         for ( x = 0; x < COLS; ++x) {
+          if(board[yy - 1][x] === 10){
+            heartCount === maxItems ? "" : heartCount++;
+          }
           board[yy][x] = board[yy - 1][x];
         }
       }
       ++y; //一行落とした為、チェック処理を１つ下へ送る
+      break;
     }
   }
-
 }
 
 //キーボードが押された時の処理
@@ -249,8 +340,13 @@ function keyPress(key) {
         console.log(poseFlag);
         console.log("start");
       }
+      break;
+    case 'heart':
+      myHeart();
+      break;
   }
 }
+
 
 //poseFlagの操作
 function pose(flag){

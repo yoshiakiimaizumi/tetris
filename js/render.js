@@ -88,22 +88,35 @@ function render() {
       }
     }
   }
-  nextRender(nextId);
+  nextRender(nextShape);
 }
 //30ミリ秒ごとに状態を描写する関数を呼び出す
 //setInterval(render,30);
 
-function nextRender(nextId){
-  var shape = shapes[nextId];
-  var color = colors[nextId];
-  var imageBlock   = imageBlocks[nextId];
+// function nextRender(nextId){
+//   var shape = shapes[nextId];
+//   var color = colors[nextId];
+//   var imageBlock   = imageBlocks[nextId];
+//   ctx2.clearRect(0, 0, 120, 120);
+//   ctx2.fillStyle = color;
+//   ctx2.strokeStyle = 'black';
+//   for(var i = 0 ; i < shape.length ; ++i){
+//     if(shape[i] !== 0){
+//       var x = parseInt((i-4)/4)===0?1:0;
+//     ctx2.drawImage(imageBlock,parseInt(x)*30,parseInt((i-4)%4)*30); //ctx2.strokeRect(parseInt(x)*30,parseInt((i-4)%4)*30,30,30);
+//     }
+//   }
+// }
+
+function nextRender(nextShape){
   ctx2.clearRect(0, 0, 120, 120);
-  ctx2.fillStyle = color;
   ctx2.strokeStyle = 'black';
-  for(var i = 0 ; i < shape.length ; ++i){
-    if(shape[i] !== 0){
+  for(var i = 0 ; i < nextShape.length ; ++i){
+    if(nextShape[i] !== 0){
+      ctx2.fillStyle = colors[nextShape[i]];
       var x = parseInt((i-4)/4)===0?1:0;
-    ctx2.drawImage(imageBlock,parseInt(x)*30,parseInt((i-4)%4)*30); //ctx2.strokeRect(parseInt(x)*30,parseInt((i-4)%4)*30,30,30);
+    ctx2.drawImage(imageBlocks[nextShape[i]-1],parseInt(x)*30,parseInt((i-4)%4)*30); //ctx2.strokeRect(parseInt(x)*30,parseInt((i-4)%4)*30,30,30);
     }
   }
+
 }
