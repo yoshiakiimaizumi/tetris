@@ -97,7 +97,7 @@ function newShape() {
     current[y] = [];
     for (var x = 0; x < 4; ++x) {
       var i = 4 * y + x;
-      if (typeof nextShape[i] != 'undefined' && nextShape[i]) {
+      if (/*typeof*/ nextShape[i] != 'undefined' && nextShape[i]) {
         current[y][x] = nextShape[i];
         //heart
         // if(Math.random()*100 < 2){
@@ -280,6 +280,7 @@ function clearOneLine(isIgnore){
       for(let col=0; col<COLS; col++){
         if(board[y][col] === 10){
           heartCount === maxItems ? "" : heartCount++;
+          heartRender();
           console.log("increment:" + heartCount + ":" + board[yy - 1]);
         }
       }
@@ -294,6 +295,12 @@ function clearOneLine(isIgnore){
     }
   }
 }
+
+//heart render 
+function heartRender(){
+  $(".myHeart").append('<li><img src="/../images/tetrisBlockHeart30.png" alt="heart"></li>');
+  console.log("heartR")
+};
 
 //キーボードが押された時の処理
 //上が押された時は回転。

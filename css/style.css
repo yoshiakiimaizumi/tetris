@@ -13,8 +13,8 @@ canvas.main{
 	float:left;
 }
 
-.enemyMedicenBox,.myMedicenBox{
-	width:100px;
+.enemyHearBox,.myHeartBox{
+	width:160px;
 	height:40px;
 	margin: 0 20px;
 	border-radius: 5px;
@@ -23,6 +23,13 @@ canvas.main{
 	box-sizing: border-box;
 }
 
+.myHeart,.enemyHear{
+  display: flex;
+  margin: 0px;
+}
+.myHeart li,.enemyHear li{
+  padding-left: 5px;
+}
 .contentBox{
 	overflow:hidden;
 	width:280px;
@@ -60,7 +67,6 @@ canvas.main{
   box-sizing: border-box;
   text-align: center;
   padding:10px;
-  margin-top: 220px;
   margin-left: 20px;
   margin-right: 25px;
   border:solid 3px cornflowerblue;
@@ -85,7 +91,6 @@ canvas.main{
   box-sizing: border-box;
   text-align: center;
   padding:10px;
-  margin-top: 220px;
   margin-left: 16px;
   border:solid 3px cornflowerblue;
   border-radius: 5px;
