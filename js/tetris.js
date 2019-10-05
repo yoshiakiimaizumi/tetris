@@ -103,8 +103,7 @@ function newShape() {
         // if(Math.random()*100 < 2){
         //   current[y][x] = 9;
         // }
-      }
-      else {
+      }else {
         current[y][x] = 0;
       }
     }
@@ -254,7 +253,7 @@ function clearLines() {
     }   
   }
   for(let i = 0; i < rowFilledCount; i++){
-    clearOneLine(true);
+    clearOneLine(false);
   }
 //countLine(false)
 }
@@ -278,11 +277,15 @@ function clearOneLine(isIgnore){
       }else{
         attack()
       }
+      for(let col=0; col<COLS; col++){
+        if(board[y][col] === 10){
+          heartCount === maxItems ? "" : heartCount++;
+          console.log("increment:" + heartCount + ":" + board[yy - 1]);
+        }
+      }
+      //rowFilled == trueより上の行を一行落とす処理
       for (var yy = y; yy>0; --yy) {
-        for ( x = 0; x < COLS; ++x) {
-          if(board[yy - 1][x] === 10){
-            heartCount === maxItems ? "" : heartCount++;
-          }
+        for (var x = 0; x < COLS; ++x) {
           board[yy][x] = board[yy - 1][x];
         }
       }
