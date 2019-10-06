@@ -15,36 +15,58 @@
     <img class="pose" src="images/stop.png" width="600" alt="stop">
     <!--   勝利判定の画像 end -->
    
-  <div class="overhidden">
-		
-    <canvas  class ="main" id = "enemydisp" width="300" height="600"></canvas>
+  <div class="battleFiledInner">
+	<canvas class="main" id="enemydisp" width="300" height="600"></canvas>
     <div class="contentBox">
-        <div class="timmer">
-        	<div id="counter">TIMER</div>
-        </div>
+        <div class="timmer"id="counter">TIMER</div>
         <div class="information">
-        	<div class="enemyInfo">
-        		<canvas id="nextShape"></canvas>
-          		<div class="enemyHeartBox">
-                <ul class="enemyHeart">
-                </ul>
-              </div>
+        	<div class="nextShapeInner">
+				<canvas id="nextShape"></canvas>
+				<canvas id="nextShape"></canvas>
        		</div>
-        	<div class="myInfo">
-        		<canvas id="nextShape"></canvas>
-        		<div class="myHeartBox">
-              <ul class="myHeart">
-              </ul>
-            </div>
+        	<div class="itemInner">
+				<div class="enemyItems">
+					<div class="enemyHeartBox">
+						<ul class="enemyHeart">
+						</ul>
+					</div>
+					<div class="enemyBallBox">
+						<ul class="enemyBall">
+						</ul>
+					</div>
+				</div>
+				<div class="myItems">
+					<div class="myHeartBox">
+						<ul class="myHeart">
+						</ul>
+					</div>
+					<div class="myBallBox">
+						<ul class="enemyBall">
+						</ul>
+					</div>
+				</div>
         	</div>
-        	</div>
-      	<div class="startSwich">
-        	<button id="getStart">TWO</button>
-			<button id="getStartOne">ONE</button>
-			<button id="testStart">TEST1</button>	
-        </div>
-    </div>
-		 <canvas class ="main" id = "mydisp" width="300" height="600"></canvas>
+		</div>
+		<div class="winMarkBox">
+				<div class="enemyWinMarkBox">
+					<ul class="enemyWin">
+					</ul>
+				</div>
+				<div class="myWinMarkBox">
+						<ul class="myWin">
+						</ul>
+				</div>
+		</div>
+      	<div class="startSwiches">
+        	<button class="getStartTwo" id="getStart">TWO</button>
+			<button class="getStartOne" id="getStartOne">ONE</button>
+		</div>
+		<div class="test">
+			<button class="getStartTest" id="testStart">TEST1</button>
+		</div>
+	</div>
+	<canvas class="main" id ="mydisp" width="300" height="600"></canvas>
+
    		
   </div>
 
