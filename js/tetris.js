@@ -255,12 +255,12 @@ function keyPress(key) {
 //poseFlagの操作
 function pose(flag){
   if(flag){
-    stopTimer();
     poseShow();
+    stopTimer();
     poseFlag = true;
   }else{
-    startTimer();
     poseHide();
+    startTimer();
     poseFlag = false;
   }
 }
