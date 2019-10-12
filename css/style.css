@@ -77,11 +77,10 @@ canvas.main{
 
 .enemyHeartBox,.myHeartBox{
 	width:40px;
-	height:160px;
+	height:145px;
 	border-radius: 5px;
 	border: solid 3px rgb(250, 44, 89);
 	background-color: #FFF;
-	box-sizing: border-box;
 }
 
 .enemyHeart,.myHeart{
@@ -90,21 +89,12 @@ canvas.main{
   padding-top: 5px;
 }
 
-.myHeart li:last-child,.enemyHeart li:last-child{
-  padding-bottom: 5px;
-}
-
-.myHeart li,.enemyHear li{
-  padding-left: 5px;
-}
-
 .enemyBallBox,.myBallBox{
 	width:40px;
-	height:160px;
+	height:145px;
 	border-radius: 5px;
 	border: solid 3px rgba(9, 155, 16, 0.836);
 	background-color: #FFF;
-	box-sizing: border-box;
 }
 
 .myBall li:last-child,.enemyBall li:last-child{
