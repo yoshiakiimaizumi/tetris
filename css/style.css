@@ -17,11 +17,12 @@ body{
 }
 
 .battleFiledInner {
-  width:1100px;
+  width:1104px;
+  margin-top: 4%;
   margin:auto;
   display: flex;
   justify-content: space-around;
-  padding: 20px 0;
+  padding: 24px 0;
 }
 
 canvas.main{
@@ -32,11 +33,12 @@ canvas.main{
 }
 
 .contentBox{
-	width:300px;
+	width:296px;
 }
 
 .timmer{
-  width:125px;
+  width:128px;
+  height: 64px;
   padding:10px;
   margin: auto;
   background-color: #FFF;
@@ -45,21 +47,22 @@ canvas.main{
   text-align: center;
   font-size: 30px;
   vertical-align: middle;
+  box-sizing: border-box;
 }
 
 .nextShapeInner{
   display:flex;
   justify-content: space-between;
 }
-#nextShape{
+.nextShape{
   display: block;
-  width:100px;
-  height:150px; 
+  width:104px;
+  height:152px; 
   background-color: #FFF;
   border: solid 3px cornflowerblue;
   border-radius: 5px;
-  padding: 15px;
-  margin: 20px 0;
+  padding: 20px;
+  margin: 24px 0;
   box-sizing: border-box;
 }
 
@@ -69,7 +72,7 @@ canvas.main{
 }
 
 .enemyItems, .myItems{
-  width: 100px;
+  width: 104px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -85,7 +88,10 @@ canvas.main{
 
 .enemyHeart,.myHeart{
   text-align: center;
-  height: 30px;
+  font-size: 0px;
+}
+
+.enemyHeart li,.myHeart li{
   padding-top: 5px;
 }
 
@@ -97,13 +103,13 @@ canvas.main{
 	background-color: #FFF;
 }
 
-.myBall li:last-child,.enemyBall li:last-child{
-  padding-bottom: 5px;
+.enemyBall, .myBall{
+  text-align: center;
+  font-size: 0px;
 }
 
 .enemyBall li, .myBall li{
-  padding: 5px 5px;
-  padding-bottom: 0px;
+  padding-top: 5px;
 }
 
 .winMarkBox{
@@ -112,12 +118,13 @@ canvas.main{
 }
 
 .enemyWinMarkBox, .myWinMarkBox{
-  width: 100px;
-  height: 60px;
+  width: 104px;
+  height: 64px;
   background-color: #FFF;
   border:solid 3px cornflowerblue;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 24px;
+  box-sizing: border-box;
 }
 
 .enemyWin, .myWin{
@@ -136,7 +143,7 @@ canvas.main{
   background-color: #FFF;
   color:#5160D8;
   font-size:25px;
-  width:100px;
+  width:104px;
   box-sizing: border-box;
   text-align: center;
   padding:10px;
@@ -147,7 +154,7 @@ canvas.main{
   font-family: 'Fascinate Inline';
 }
 
-.getStartTwo:hover{
+.getStartTwo:enabled:hover{
   background-color: cornflowerblue;
   color:rgb(238, 80, 106);
   text-shadow: -6px 0px 15px rgba(255, 255, 255, 0.83), 6px 0px 15px rgba(255, 255, 255, 0.83);
@@ -157,7 +164,7 @@ canvas.main{
   background-color: #FFF;
   color:#5160D8;
   font-size:25px;
-  width:100px;
+  width:104px;
   box-sizing: border-box;
   text-align: center;
   padding:10px;
@@ -168,21 +175,21 @@ canvas.main{
   font-family: 'Fascinate Inline';
 }
 
-.getStartOne:hover{
+.getStartOne:enabled:hover{
   background-color: cornflowerblue;
   color:rgb(236, 152, 26);
   text-shadow: -6px 0px 15px rgba(255, 255, 255, 0.83), 6px 0px 15px rgba(255, 255, 255, 0.83);
 }
 
 .test{
-  padding-top: 20px;
+  padding-top: 24px;
 }
 
 .getStartTest{
   background-color: #FFF;
   color:#5160D8;
   font-size:25px;
-  width:100px;
+  width:104px;
   box-sizing: border-box;
   text-align: center;
   padding:10px;
@@ -195,18 +202,40 @@ canvas.main{
   display: inherit;
 }
 
-.getStartTest:hover{
+.getStartTest:enabled:hover{
   background-color: cornflowerblue;
   font-weight: bold;
   color:rgba(56, 54, 54, 0.603);
   text-shadow: -6px 0px 15px rgba(255, 255, 255, 0.83), 6px 0px 15px rgba(255, 255, 255, 0.83);
 }
 
+button:disabled{
+  background-color: rgb(226, 224, 224);
+  color:rgb(250, 251, 252);
+  font-size:25px;
+  width:104px;
+  box-sizing: border-box;
+  text-align: center;
+  padding:10px;
+  border:solid 3px rgb(145, 145, 146);
+  border-radius: 5px;
+  text-shadow: 0 0 5px rgba(168, 170, 197, 0.73);
+  transition: .5s;
+  font-family: 'Fascinate Inline';
+}
+
 .bg-image-loop{
-  background-image: url("../images/background.png");
-  background-size:auto 65%;
+  background-image: url("../images/back1.png");
+  background-size:auto 80px;
   animation: bg-slider 50000s linear infinite;
 }
+/* auto 65% back0*/
+/* auto 80px; back1*/
+/* auto 200px; back2*/
+/* auto 250px; back3*/
+/* auto 300px; back4*/
+/* auto 500px; back5*/
+/* auto 400px; back6*/
 
 @keyframes bg-slider {
 	from { background-position: 0 0; }

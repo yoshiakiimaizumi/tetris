@@ -25,13 +25,13 @@ var imageBlocks = [cyan,orange,blue,yellow,red,green,purple,stone,pink,heart];
 //描写処理はtetris.jsのメインループ処理とは完全に独立してループする
 //1canvasのベース
 //現在の盤面の状態を描写する処理
-var myCanvas = document.getElementById('mydisp'); //canvas
+var myCanvas = document.getElementById('myDisp'); //canvas
 var ctx = myCanvas.getContext('2d'); //コンテクスト
 var W = 300, H = 600; //canvas size
 var BLOCK_W = W/COLS, BLOCK_H = H/ROWS;　//マスの幅を設定
 
 var nextCanvas =
-document.getElementById('nextShape');
+document.getElementById('myNextShape');
 nextCanvas.width = 60;
 nextCanvas.height =120;
 var ctx2 = nextCanvas.getContext('2d');

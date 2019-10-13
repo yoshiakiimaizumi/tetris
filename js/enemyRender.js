@@ -1,5 +1,5 @@
 var enemyBoard;
-var enemyCanvas = document.getElementById('enemydisp'); //canvas
+var enemyCanvas = document.getElementById('enemyDisp'); //canvas
 var ctxE = enemyCanvas.getContext('2d'); //コンテクスト
 
 function enemyRender(data){
