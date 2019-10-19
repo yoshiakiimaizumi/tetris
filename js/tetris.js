@@ -298,8 +298,9 @@ function clearOneLine(isIgnore){
 
 //heart render 
 function heartRender(){
-  $(".myHeart").append('<li><img src="/../images/tetrisBlockHeart30.png" alt="heart"></li>');
-  console.log("heartR")
+  for(let i = 0 ;heartCount < i; i++){
+    $('.heart' + i+1).show();
+  }
 };
 
 //キーボードが押された時の処理

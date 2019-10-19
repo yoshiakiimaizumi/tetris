@@ -16,11 +16,15 @@ body{
   font-family: 'Fascinate Inline';
 }
 
-.container {
+.container{
   background: url("../images/back1.png") center;
   background-size:auto 80px;
   animation: bg-slider 50000s linear infinite;
   height: 100vh;
+}
+@keyframes bg-slider {
+	from { background-position: 0 0; }
+    to { background-position: -1366000px -870000px; }
 }
 
 .switchStyle[type="checkbox"]{
@@ -140,6 +144,10 @@ canvas.main{
 
 .enemyHeart li,.myHeart li{
   padding-top: 5px;
+}
+
+img[class^="heart"]{
+  display: none;
 }
 
 .enemyBallBox,.myBallBox{
@@ -271,7 +279,6 @@ button:disabled{
   font-family: 'Fascinate Inline';
 }
 
-
 /* auto 65% back0*/
 /* auto 80px; back1*/
 /* auto 200px; back2*/
@@ -280,10 +287,7 @@ button:disabled{
 /* auto 500px; back5*/
 /* auto 400px; back6*/
 
-@keyframes bg-slider {
-	from { background-position: 0 0; }
-    to { background-position: -1366000px -870000px; }
-}
+
 /*エフェクト画像*/
 .win{
   position: absolute;
