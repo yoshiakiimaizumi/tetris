@@ -16,13 +16,60 @@ body{
   font-family: 'Fascinate Inline';
 }
 
+.container {
+  background: url("../images/back1.png") center;
+  background-size:auto 80px;
+  animation: bg-slider 50000s linear infinite;
+  height: 100vh;
+}
+
+.switchStyle[type="checkbox"]{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  margin: 0;
+}
+.fullSwitch{
+  background-color: #FFF;
+  color:#5160D8;
+  font-size:25px;
+  width:160px;
+  text-align: center;
+  box-sizing: border-box;
+  padding:10px;
+  border:solid 3px cornflowerblue;
+  border-radius: 5px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.73);
+  transition: .5s;
+  font-family: 'Fascinate Inline';
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
+.switchStyle[type="checkbox"]:checked + .fullSwitch[for="fullScreenSwitch"]{
+  background-color: #111111;
+  color:rgb(240, 144, 34);
+  font-size:25px;
+  text-align: center;
+  width: 160px;
+  box-sizing: border-box;
+  padding:10px;
+  border:solid 3px cornflowerblue;
+  border-radius: 5px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.73);
+  transition: .5s;
+  font-family: 'Fascinate Inline';
+  position: absolute;
+  top: 24px;
+  left: 24px;
+} 
+
 .battleFiledInner {
   width:1104px;
-  margin-top: 4%;
+  padding-top: 5.5%;
   margin:auto;
   display: flex;
   justify-content: space-around;
-  padding: 24px 0;
 }
 
 canvas.main{
@@ -224,11 +271,7 @@ button:disabled{
   font-family: 'Fascinate Inline';
 }
 
-.bg-image-loop{
-  background-image: url("../images/back1.png");
-  background-size:auto 80px;
-  animation: bg-slider 50000s linear infinite;
-}
+
 /* auto 65% back0*/
 /* auto 80px; back1*/
 /* auto 200px; back2*/
