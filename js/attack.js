@@ -1,13 +1,13 @@
-var clearLineCounter = 0;
+var pinkClearLineCounter = 0;
 function attack(){
     socket.emit('attack','')
 }
 
 function pinkAttack(){
-  clearLineCounter ++;
-  if(clearLineCounter === 3){
+  pinkClearLineCounter ++;
+  if(pinkClearLineCounter === 3){
     socket.emit('attack','')
-    clearLineCounter = 0;
+    pinkClearLineCounter = 0;
   }
 
 }

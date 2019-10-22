@@ -146,6 +146,7 @@ function tick() {
     clearLines();  // ライン消去処理
     //ブロックが着地するまでグレイのラインが出ないようにする。
     if(mAfter){
+      stoneSound();
       addStoneLine(8);
       mAfter=false;
     }
@@ -153,12 +154,14 @@ function tick() {
     if(attackedCounter > 0 && isVS){
       for(var i = 0; i < attackedCounter ; ++i){
         upLineForAttacked();
+        attackedSound();
       }
       attackedCounter = 0;
     }
     //ゲームオーバーになった時
     if (lose && isVS) {
       //負けた人様の画像
+      BGMStop();
       loserImage();
       //相手に負けたことを送る
       socket.emit('end','winner');
@@ -186,6 +189,7 @@ function freeze() {
       }
     }
   }
+  freezeSound();
 }
 
 //操作ブロックを回す処理
@@ -250,6 +254,7 @@ function clearLines() {
     //一行がそろっているのか調べる
     if (!board[y].includes(0) && !board[y].includes(8)) {
       rowFilledCount++;
+      clearLinesSound();
     }   
   }
   for(let i = 0; i < rowFilledCount; i++){
@@ -314,16 +319,19 @@ function keyPress(key) {
     case 'left':
       if (valid(-1)) {
         --currentX;//左に１つずつずらす
+        moveSound();
       }
       break;
     case 'right':
       if (valid(1)) {
       ++currentX;//に１つずつずらす
+      moveSound();
   }
       break;
     case 'down':
       if (valid(0,1)) {
         ++currentY;//下に１つずつずらす
+        moveSound();
       }
       break;
     case 'rotate'://操作ブロックを回す
@@ -332,20 +340,24 @@ function keyPress(key) {
         current = rotated;//回せる場合は回したあとの状態に操作ブロックをセットする。
       }else if(valid(1,0,rotated)){
     	  current = rotated;
-    	  ++currentX;
+        ++currentX;
+        moveSound();
       }else if(valid(-1,0,rotated)){
     	  current = rotated;
-    	  --currentX;
+        --currentX;
+        moveSound();
       }
       break;
     case 'pose':
         //poseBtnが押されていない(pose)
       if(!poseFlag){
+        btnPushSound();
         pose(true);
         socket.emit('pose',true);
         console.log(poseFlag);
         console.log("stop");
       }else{//poseBtnが押されている(pose解除)
+        btnPushSound();
         pose(false);
         socket.emit('pose',false);
         console.log(poseFlag);
@@ -422,6 +434,7 @@ function timer() {
   //1分ごとの処理（不可ブロック一段追加）
   if(beforeMinutes+1 === minutes){
       beforeMinutes++;
+      minutsAlertSound();
       mAfter = true;
   }
 }
@@ -443,7 +456,8 @@ function addStoneLine(blockNumber){
 
 //new game 画面を呼びだす
 function newGame(vsOrNot) {
-	isVS = vsOrNot;
+  isVS = vsOrNot;
+  BGMStart();
 	clearInterval(interval); //ゲームタイマーをクリア
 	clearInterval(timerCount);
 	init(); //盤面をリセット
@@ -476,6 +490,7 @@ function stopTimer(){
    clearInterval(timerCount);
    clearInterval(renderInterval);
    clearInterval(emitInterval);
+   BGMStop();
 }
 
 function startTimer(){
@@ -483,4 +498,5 @@ function startTimer(){
   timerCount = setInterval(timer,1000); 
   renderInterval = setInterval(render,20)
   emitInterval = setInterval(myInfo,20)
+  BGMStart();
 }

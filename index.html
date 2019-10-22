@@ -87,6 +87,7 @@
        socket = io.connect();
        attackedCounter = 0;
       $("#getStart").click(function(){
+        btnPushSound();
         console.log("1 ok");
         $("#getStart").prop("disabled", true);
         //$("#getStart").fadeOut(1000);
@@ -95,6 +96,7 @@
       });
       socket.on('toGame',function(data){
         console.log("2 ok");
+        btnPushSound();
         newGame(true);
       });
       socket.on('board',function(data){
@@ -107,12 +109,14 @@
         pose(data);
       });
       socket.on('end',function(data){
-         winnerImage();
-          stopTimer();
+        winnerImage();
+        BGMStop();
+        stopTimer();
         $("#getStart").prop("disabled", false);
         //$("#getStart").fadeIn(2000);
       });
       $("#testStart").click(function(){
+        btnPushSound();
     	 myGame(); 
       });
 });
