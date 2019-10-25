@@ -5,7 +5,7 @@ let attacked2 = new Audio("../sounds/attacked/drum-japanese2.mp3");
 let attacked3 = new Audio("../sounds/attacked/mens-ou1.mp3");
 
 let minutsAlert = new Audio("../sounds/minutsAlert/warning1.mp3");
-let stone = new Audio("../sounds/attacked/cursor6.mp3");
+let stone = new Audio("../sounds/stone/cursor6.mp3");
 
 let clearLines1 = new Audio("../sounds/clearLines/decision26.mp3");
 let clearLines2 = new Audio("../sounds/clearLines/decision28.mp3");

@@ -22,6 +22,13 @@ body{
   animation: bg-slider 50000s linear infinite;
   height: 100vh;
 }
+/* auto 65% back0*/
+/* auto 80px; back1*/
+/* auto 200px; back2*/
+/* auto 250px; back3*/
+/* auto 300px; back4*/
+/* auto 500px; back5*/
+/* auto 400px; back6*/
 @keyframes bg-slider {
 	from { background-position: 0 0; }
     to { background-position: -1366000px -870000px; }
@@ -79,8 +86,9 @@ body{
 canvas.main{
   display: block;
   margin: 50px auto 0;
-  border: 1px solid black;
+  border: 1px solid #00000054;
   background-color: #FFF;
+  opacity: 0.8;
 }
 
 .contentBox{
@@ -278,15 +286,6 @@ button:disabled{
   transition: .5s;
   font-family: 'Fascinate Inline';
 }
-
-/* auto 65% back0*/
-/* auto 80px; back1*/
-/* auto 200px; back2*/
-/* auto 250px; back3*/
-/* auto 300px; back4*/
-/* auto 500px; back5*/
-/* auto 400px; back6*/
-
 
 /*エフェクト画像*/
 .win{
