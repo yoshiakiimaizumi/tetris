@@ -54,10 +54,10 @@ function clearLinesSound(){
     }
 }
 
-function heartClearSound(){
-    if(heartCount <= 2){
+function heartClearSound(count){
+    if(count <= 2){
         heartClearAudio1.play();
-    }else if(heartCount === 3){
+    }else if(count === 3){
         heartClearAudio2.play();
     }else{
         heartClearAudio3.play();

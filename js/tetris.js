@@ -157,8 +157,8 @@ function tick() {
     if(attackedCounter > 0 && isVS){
       for(var i = 0; i < attackedCounter ; ++i){
         upLineForAttacked();
-        attackedSound();
       }
+      attackedSound();
       attackedCounter = 0;
     }
     //ゲームオーバーになった時
