@@ -77,7 +77,7 @@ body{
 
 .battleFiledInner {
   width:1104px;
-  padding-top: 5.5%;
+  padding-top: 3%;
   margin:auto;
   display: flex;
   justify-content: space-around;
@@ -88,7 +88,6 @@ canvas.main{
   margin: 50px auto 0;
   border: 1px solid #00000054;
   background-color: #FFF;
-  opacity: 0.8;
 }
 
 .contentBox{
@@ -296,6 +295,7 @@ button:disabled{
   bottom: 0;
   margin: auto;
   display:none;
+  z-index: 1000;
 }
 
 .lose{
@@ -306,6 +306,7 @@ button:disabled{
   bottom: 0;
   margin: auto;
   display:none;
+  z-index: 1000;
 }
 
 .wait{
@@ -317,6 +318,7 @@ button:disabled{
   margin: auto;
   margin-right:-630px;
   display:none;
+  z-index: 1000;
 }
 
 .pose{
@@ -327,4 +329,5 @@ button:disabled{
   bottom: 0;
   margin: auto;
   display:none;
+  z-index: 1000;
 }

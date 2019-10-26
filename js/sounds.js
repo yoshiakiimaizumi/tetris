@@ -1,77 +1,77 @@
-let BGM = new Audio("../sounds/BGM/ピコピコランドリー.mp3");
+const battleAudio1 = new Audio("../sounds/BGM/pikopiko.mp3");
 
-let attacked1 = new Audio("../sounds/attacked/drum-japanese1.mp3");
-let attacked2 = new Audio("../sounds/attacked/drum-japanese2.mp3");
-let attacked3 = new Audio("../sounds/attacked/mens-ou1.mp3");
+let attackedAudio1 = new Audio("../sounds/attacked/drum-japanese1.mp3");
+let attackedAudio2 = new Audio("../sounds/attacked/drum-japanese2.mp3");
+let attackedAudio3 = new Audio("../sounds/attacked/mens-ou1.mp3");
 
-let minutsAlert = new Audio("../sounds/minutsAlert/warning1.mp3");
-let stone = new Audio("../sounds/stone/cursor6.mp3");
+let minutsAlertAudio = new Audio("../sounds/minutesAlert/warning1.mp3");
+let stoneAudio = new Audio("../sounds/stone/cursor6.mp3");
 
-let clearLines1 = new Audio("../sounds/clearLines/decision26.mp3");
-let clearLines2 = new Audio("../sounds/clearLines/decision28.mp3");
-let clearLines3 = new Audio("../sounds/clearLines/trumpet1.mp3");
+let clearLinesAudio1 = new Audio("../sounds/clearLines/decision26.mp3");
+let clearLinesAudio2 = new Audio("../sounds/clearLines/decision28.mp3");
+let clearLinesAudio3 = new Audio("../sounds/clearLines/trumpet1.mp3");
 
-let heartClear1 = new Audio("../sounds/clearLines/kira1.mp3");
-let heartClear2 = new Audio("../sounds/clearLines/kira2.mp3");
-let heartClear3 = new Audio("../sounds/clearLines/line-girl1_line-girl1-yattane1.mp3");
+let heartClearAudio1 = new Audio("../sounds/heartClear/kira1.mp3");
+let heartClearAudio2 = new Audio("../sounds/heartClear/kira2.mp3");
+let heartClearAudio3 = new Audio("../sounds/heartClear/line-girl1_line-girl1-yattane1.mp3");
 
-let btnPush = new Audio("../sounds/btnPush/decision3.mp3");
-let move = new Audio("../sounds/btnPush/cursor8.mp3");
-let freeze = new Audio("../sounds/btnPush/cursor9.mp3");
+let btnPushAudio = new Audio("../sounds/btnPush/decision3.mp3");
+let moveAudio = new Audio("../sounds/move/cursor8.mp3");
+let freezeAudio = new Audio("../sounds/freeze/cursor9.mp3");
 
 function BGMStart(){
-    BGM.play();
-    BGM.loop = 'true';
+    battleAudio1.play();
+    battleAudio1.loop = 'true';
 }
 function BGMStop(){
-    BGM.pause();
+    battleAudio1.pause();
 }
 
 function attackedSound(){
-    if(attackedCounter > 3){
-        attacked1.play();
+    if(attackedCounter <= 2){
+        attackedAudio1.play();
     }else if(attackedCounter === 3){
-        attacked2.play();
+        attackedAudio2.play();
     }else{
-        attacked3.play();
+        attackedAudio3.play();
     }
 }
 
 function minutsAlertSound(){
-    minutsAlert.play();
+    minutsAlertAudio.play();
 }
 function stoneSound(){
-    stone.play();
+    stoneAudio.play();
 }
 
 function clearLinesSound(){
-    if(rowFilledCount > 3){
-        clearLines1.play();
+    if(rowFilledCount <= 2){
+        clearLinesAudio1.play();
     }else if(rowFilledCount === 3){
-        clearLines2.play();
+        clearLinesAudio2.play();
     }else{
-        clearLines3.play();
+        clearLinesAudio3.play();
     }
 }
 
 function heartClearSound(){
-    if(heartCount > 3){
-        heartClear1.play();
+    if(heartCount <= 2){
+        heartClearAudio1.play();
     }else if(heartCount === 3){
-        heartClear2.play();
+        heartClearAudio2.play();
     }else{
-        heartClear3.play();
+        heartClearAudio3.play();
     }
 }
 
 function btnPushSound(){
-    btnPush.play();
+    btnPushAudio.play();
 }
 
 function moveSound(){
-    move.play();
+    moveAudio.play();
 }
 
 function freezeSound(){
-    freeze.play();
+    freezeAudio.play();
 }

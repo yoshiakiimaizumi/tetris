@@ -14,7 +14,9 @@ var renderInterval ;
 var emitInterval;
 var isVS;
 var nextShape;//ランダムで選ばれた形・カラー設定されたもの
-let heartCount = 0;
+var rowFilledCount = 0;　//消した行のカウント
+let attackedCounter = 0; //攻撃をうけた行のカウント
+let heartCount = 0; //ハート保持
 let maxItems = 4; //アイテム保持
 
 //操作するブロックのパターン
@@ -143,11 +145,12 @@ function tick() {
   // もし着地していたら(１つしたにブロックがあったら)
   else {
     freeze();  // 操作ブロックを盤面へ固定する
+    freezeSound();
     clearLines();  // ライン消去処理
     //ブロックが着地するまでグレイのラインが出ないようにする。
     if(mAfter){
-      stoneSound();
       addStoneLine(8);
+      stoneSound();
       mAfter=false;
     }
     //自分の消したライン分、相手にラインを送れる
@@ -189,7 +192,6 @@ function freeze() {
       }
     }
   }
-  freezeSound();
 }
 
 //操作ブロックを回す処理
@@ -249,12 +251,10 @@ function rotate(current) {
 
 //一行そろっているか調べ、そろっていたらその行を消す
 function clearLines() {
-  var rowFilledCount = 0;
   for (var y = ROWS - 1; y >= 0; --y) {
     //一行がそろっているのか調べる
     if (!board[y].includes(0) && !board[y].includes(8)) {
       rowFilledCount++;
-      clearLinesSound();
     }   
   }
   for(let i = 0; i < rowFilledCount; i++){
@@ -285,8 +285,8 @@ function clearOneLine(isIgnore){
       for(let col=0; col<COLS; col++){
         if(board[y][col] === 10){
           heartCount === maxItems ? "" : heartCount++;
-          heartRender();
           console.log("increment:" + heartCount + ":" + board[yy - 1]);
+          heartRender();
         }
       }
       //rowFilled == trueより上の行を一行落とす処理
@@ -303,8 +303,10 @@ function clearOneLine(isIgnore){
 
 //heart render 
 function heartRender(){
-  for(let i = 0 ;heartCount < i; i++){
-    $('.heart' + i+1).show();
+  for(let i = 0 ; i < heartCount; i++){
+    console.log('heaertS');
+    $('.heart' + (i + 1)).show();
+    console.log('heaertR');
   }
 };
 
@@ -319,19 +321,16 @@ function keyPress(key) {
     case 'left':
       if (valid(-1)) {
         --currentX;//左に１つずつずらす
-        moveSound();
       }
       break;
     case 'right':
       if (valid(1)) {
       ++currentX;//に１つずつずらす
-      moveSound();
   }
       break;
     case 'down':
       if (valid(0,1)) {
         ++currentY;//下に１つずつずらす
-        moveSound();
       }
       break;
     case 'rotate'://操作ブロックを回す
@@ -341,35 +340,34 @@ function keyPress(key) {
       }else if(valid(1,0,rotated)){
     	  current = rotated;
         ++currentX;
-        moveSound();
       }else if(valid(-1,0,rotated)){
     	  current = rotated;
         --currentX;
-        moveSound();
       }
       break;
     case 'pose':
         //poseBtnが押されていない(pose)
       if(!poseFlag){
-        btnPushSound();
         pose(true);
         socket.emit('pose',true);
         console.log(poseFlag);
         console.log("stop");
-      }else{//poseBtnが押されている(pose解除)
         btnPushSound();
+      }else{//poseBtnが押されている(pose解除)
         pose(false);
         socket.emit('pose',false);
         console.log(poseFlag);
         console.log("start");
+        btnPushSound();
       }
       break;
     case 'heart':
       myHeart();
+      heartClearSound();
+      $('img[class^="heart"]').hide();
       break;
   }
 }
-
 
 //poseFlagの操作
 function pose(flag){
@@ -457,7 +455,6 @@ function addStoneLine(blockNumber){
 //new game 画面を呼びだす
 function newGame(vsOrNot) {
   isVS = vsOrNot;
-  BGMStart();
 	clearInterval(interval); //ゲームタイマーをクリア
 	clearInterval(timerCount);
 	init(); //盤面をリセット
@@ -490,13 +487,11 @@ function stopTimer(){
    clearInterval(timerCount);
    clearInterval(renderInterval);
    clearInterval(emitInterval);
-   BGMStop();
 }
 
 function startTimer(){
   interval = setInterval(tick,500);
   timerCount = setInterval(timer,1000); 
-  renderInterval = setInterval(render,20)
-  emitInterval = setInterval(myInfo,20)
-  BGMStart();
+  renderInterval = setInterval(render,20);
+  emitInterval = setInterval(myInfo,20);
 }

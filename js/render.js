@@ -118,5 +118,4 @@ function nextRender(nextShape){
     ctx2.drawImage(imageBlocks[nextShape[i]-1],parseInt(x)*30,parseInt((i-4)%4)*30); //ctx2.strokeRect(parseInt(x)*30,parseInt((i-4)%4)*30,30,30);
     }
   }
-
 }
