@@ -373,10 +373,12 @@ function keyPress(key) {
 function pose(flag){
   if(flag){
     poseShow();
+    BGMStop();
     stopTimer();
     poseFlag = true;
   }else{
     poseHide();
+    BGMStart();
     startTimer();
     poseFlag = false;
   }
@@ -458,7 +460,8 @@ function newGame(vsOrNot) {
 	clearInterval(interval); //ゲームタイマーをクリア
 	clearInterval(timerCount);
 	init(); //盤面をリセット
-	newShape(); //操作ブロックをセット
+  newShape(); //操作ブロックをセット
+  BGMStart();
 	interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
 	startTime = Date.now();
 	timerCount = setInterval( timer,1000 ); //
@@ -467,7 +470,8 @@ function newGame(vsOrNot) {
 	if(isVS){
 		lose = false; //負けフラグ
 		emitInterval = setInterval(myInfo,20);
-		attackedCounter = 0;
+    attackedCounter = 0;
+    BGMStop();
 	}
 	$(".win").hide();
 	$(".lose").hide();

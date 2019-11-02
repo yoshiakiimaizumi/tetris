@@ -90,7 +90,8 @@
         console.log("1 ok");
         $("#getStart").prop("disabled", true);
         //$("#getStart").fadeOut(1000);
-        waitImage()
+        waitImage();
+        BGMStop();
         socket.emit('aikotoba','start');
       });
       socket.on('toGame',function(data){
