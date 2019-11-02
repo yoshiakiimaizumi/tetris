@@ -18,7 +18,7 @@ stone.src = "../images/tetrisBlockStone30.png";
 var pink =new Image();//アタックブロック
 pink.src = "../images/tetrisBlockPink30.png";
 var heart =new Image();//回復ブロック
-heart.src = "../images/tetrisBlockHeart30.png";
+heart.src = "../images/tetrisBlockHeart30Line.png";
 
 var imageBlocks = [cyan,orange,blue,yellow,red,green,purple,stone,pink,heart];
 //render.jsにcanvasの描写処理を書いていく

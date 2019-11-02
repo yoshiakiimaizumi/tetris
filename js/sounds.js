@@ -1,4 +1,4 @@
-const battleAudio1 = new Audio("../sounds/BGM/pikopiko.mp3");
+const battleAudio1 = new Audio("../sounds/BGM/WALKING_AROUND.mp3");
 
 let attackedAudio1 = new Audio("../sounds/attacked/drum-japanese1.mp3");
 let attackedAudio2 = new Audio("../sounds/attacked/drum-japanese2.mp3");
@@ -16,8 +16,8 @@ let heartClearAudio2 = new Audio("../sounds/heartClear/kira2.mp3");
 let heartClearAudio3 = new Audio("../sounds/heartClear/line-girl1_line-girl1-yattane1.mp3");
 
 let btnPushAudio = new Audio("../sounds/btnPush/decision3.mp3");
-let moveAudio = new Audio("../sounds/move/cursor8.mp3");
-let freezeAudio = new Audio("../sounds/freeze/cursor9.mp3");
+//let moveAudio = new Audio("../sounds/move/cursor8.mp3");
+let freezeAudio = new Audio("../sounds/move/cursor8.mp3");
 
 function BGMStart(){
     battleAudio1.play();
