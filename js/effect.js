@@ -67,7 +67,25 @@ let aryNum = Math.floor((Math.random())*7);
 $('.container').css({'background':'url(../images/' + imagesAry[aryNum] + '.png) center','background-size':imgSizeAry[aryNum]});
 }
 
+const windowH = window.innerHeight;
 
+let boxList = [".battleFiledInner", "canvas.main", ".timmer", ".nextShape", 
+            ".enemyItems", ".myItems", ".enemyHeartBox", ".myHeartBox", 
+            ".enemyBallBox", ".myBallBox", ".enemyWinMarkBox", ".myWinMarkBox", ".getStartTwo", ".getStartOne", ".getStartTest"]
+    console.log(windowH);
+if(windowH <= 745){
+    for(let i = 0; i < boxList.length; i++){
+        let currentW = $(boxList[i]).width();
+        let currentH = $(boxList[i]).height();
+        console.log(currentW, currentH );
+        $(boxList[i]).css({
+            'width': currentW * ((windowH - 50) / 695),
+            'height': currentH * ((windowH - 50) / 695)
+        });
+        console.log("UMM" + currentW, currentH );
+    }
+
+};
 //フルスクリーンスイッチ(要検討)
     // const fullBtn = $('#fullScreenSwitch');
 
@@ -118,5 +136,5 @@ $('.container').css({'background':'url(../images/' + imagesAry[aryNum] + '.png) 
     //     document.msExitFullscreen();
     // }
     // }
-      
+
 

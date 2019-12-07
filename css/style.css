@@ -88,6 +88,8 @@ canvas.main{
   margin: 50px auto 0;
   border: 1px solid #00000054;
   background-color: #FFF;
+  width: 300px;
+  height: 600px;
 }
 
 .contentBox{
@@ -275,7 +277,6 @@ button:disabled{
   background-color: rgb(226, 224, 224);
   color:rgb(250, 251, 252);
   font-size:25px;
-  width:104px;
   box-sizing: border-box;
   text-align: center;
   padding:10px;

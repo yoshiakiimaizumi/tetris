@@ -22,7 +22,7 @@
     <p><button id="btnExit" class="orange">フルスクリーンを解除する</button></p>
   </main> -->
   <div class="battleFiledInner">
-	  <canvas class="main" id="enemyDisp" width="300" height="600"></canvas>
+	<canvas class="main" id="enemyDisp" width="300px" height="600px"></canvas>
     <div class="contentBox">
       <div class="timmer"id="counter">TIMER</div>
       <div class="information">
@@ -31,20 +31,20 @@
           <canvas class="nextShape" id="myNextShape"></canvas>
         </div>
         <div class="itemInner">
-				  <div class="enemyItems">
-					  <div class="enemyHeartBox">
+				<div class="enemyItems">
+					<div class="enemyHeartBox">
               <ul class="enemyHeart">
                   <li><img class="heart1" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
                   <li><img class="heart2" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
                   <li><img class="heart3" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
                   <li><img class="heart4" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
               </ul>
-					  </div>
-					  <div class="enemyBallBox">
+					</div>
+					<div class="enemyBallBox">
               <ul class="enemyBall">
               </ul>
-					  </div>
-				  </div>
+					</div>
+				</div>
           <div class="myItems">
             <div class="myHeartBox">
               <ul class="myHeart">
@@ -60,8 +60,8 @@
             </div>
           </div>
         </div>
-		  </div>
-		  <div class="winMarkBox">
+		</div>
+		<div class="winMarkBox">
 				<div class="enemyWinMarkBox">
 					<ul class="enemyWin">
 					</ul>
@@ -70,22 +70,22 @@
 						<ul class="myWin">
 						</ul>
 				</div>
-		  </div>
+		</div>
       <div class="startSwiches">
         <button class="getStartTwo" id="getStart">TWO</button>
-			  <button class="getStartOne" id="getStartOne">ONE</button>
-		  </div>
-		  <div class="test">
-			  <button class="getStartTest" id="testStart">TEST1</button>
-		  </div>
-	  </div>
-	  <canvas class="main" id ="myDisp" width="300" height="600"></canvas>
+			<button class="getStartOne" id="getStartOne">ONE</button>
+		</div>
+		<div class="test">
+			<button class="getStartTest" id="testStart">TEST1</button>
+		</div>
+	</div>
+	<canvas class="main" id ="myDisp" width="300px" height="600px"></canvas>
   </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
- $(function(){
-       socket = io.connect();
-       attackedCounter = 0;
+$(function(){
+      socket = io.connect();
+      attackedCounter = 0;
       $("#getStart").click(function(){
         console.log("1 ok");
         $("#getStart").prop("disabled", true);
@@ -115,8 +115,7 @@
       });
       $("#testStart").click(function(){
         randomImges();
-        btnPushSound();
-    	  myGame(); 
+        btnPushSound();myGame(); 
       });
 });
   </script>
