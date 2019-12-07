@@ -18,7 +18,8 @@ document.body.onkeydown = function (e) {
     39: 'right',
     40: 'down',
     38: 'rotate',
-    80: 'pose'
+    80: 'pose', //p
+    90: 'heart' //z
   };
 
   if (typeof keys[e.keyCode] !== 'undefind') {

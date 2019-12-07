@@ -6,7 +6,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Fascinate+Inline" rel="stylesheet">
 	<link rel='stylesheet' href='./css/style.css'>
   </head>
-  <body class="bg-image-loop">
+  <body>
+  <div class="container">
 	<script src='/socket.io/socket.io.js' type="text/javascript"></script>
     <!--   勝利判定の画像 -->
     <img class="win" src="images/WIN.png" width="700" heigth="357" alt="win">
@@ -14,34 +15,72 @@
     <img class="wait" src="images/wait.png" width="600" alt="wait">
     <img class="pose" src="images/stop.png" width="600" alt="stop">
     <!--   勝利判定の画像 end -->
-   
-  <div class="overhidden">
-		
-    <canvas  class ="main" id = "enemydisp" width="300" height="600"></canvas>
+  <input type="checkbox" class="switchStyle" id="fullScreenSwitch" value="off">
+  <!-- <label for="fullScreenSwitch" class="fullSwitch" >FULL OFF</label>
+  <main>
+    <p><button id="btn" class="blue">フルスクリーンにする</button></p>
+    <p><button id="btnExit" class="orange">フルスクリーンを解除する</button></p>
+  </main> -->
+  <div class="battleFiledInner">
+	  <canvas class="main" id="enemyDisp" width="300" height="600"></canvas>
     <div class="contentBox">
-        <div class="timmer">
-        	<div id="counter">TIMER</div>
+      <div class="timmer"id="counter">TIMER</div>
+      <div class="information">
+        <div class="nextShapeInner">
+          <canvas class="nextShape" id="enemyNextShape"></canvas>
+          <canvas class="nextShape" id="myNextShape"></canvas>
         </div>
-        <div class="information">
-        	<div class="enemyInfo">
-        		<canvas id="nextShape"></canvas>
-          		<div class="enemyMedicenBox"></div>
-       		</div>
-        	<div class="myInfo">
-        		<canvas id="nextShape"></canvas>
-        		<div class="myMedicenBox"></div>
-        	</div>
-        	</div>
-      	<div class="startSwich">
-        	<button id="getStart">TWO</button>
-			<button id="getStartOne">ONE</button>
-			<button id="testStart">TEST1</button>	
+        <div class="itemInner">
+				  <div class="enemyItems">
+					  <div class="enemyHeartBox">
+              <ul class="enemyHeart">
+                  <li><img class="heart1" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+                  <li><img class="heart2" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+                  <li><img class="heart3" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+                  <li><img class="heart4" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+              </ul>
+					  </div>
+					  <div class="enemyBallBox">
+              <ul class="enemyBall">
+              </ul>
+					  </div>
+				  </div>
+          <div class="myItems">
+            <div class="myHeartBox">
+              <ul class="myHeart">
+                  <li><img class="heart1" name="heart1" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+                  <li><img class="heart2" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+                  <li><img class="heart3" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+                  <li><img class="heart4" src="/../images/tetrisBlockHeart30.png" alt="heart"></li>
+              </ul>
+            </div>
+            <div class="myBallBox">
+              <ul class="enemyBall">
+              </ul>
+            </div>
+          </div>
         </div>
-    </div>
-		 <canvas class ="main" id = "mydisp" width="300" height="600"></canvas>
-   		
+		  </div>
+		  <div class="winMarkBox">
+				<div class="enemyWinMarkBox">
+					<ul class="enemyWin">
+					</ul>
+				</div>
+				<div class="myWinMarkBox">
+						<ul class="myWin">
+						</ul>
+				</div>
+		  </div>
+      <div class="startSwiches">
+        <button class="getStartTwo" id="getStart">TWO</button>
+			  <button class="getStartOne" id="getStartOne">ONE</button>
+		  </div>
+		  <div class="test">
+			  <button class="getStartTest" id="testStart">TEST1</button>
+		  </div>
+	  </div>
+	  <canvas class="main" id ="myDisp" width="300" height="600"></canvas>
   </div>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
  $(function(){
@@ -50,8 +89,9 @@
       $("#getStart").click(function(){
         console.log("1 ok");
         $("#getStart").prop("disabled", true);
-        $("#getStart").fadeOut(1000);
-        waitImage()
+        //$("#getStart").fadeOut(1000);
+        waitImage();
+        BGMStop();
         socket.emit('aikotoba','start');
       });
       socket.on('toGame',function(data){
@@ -68,23 +108,28 @@
         pose(data);
       });
       socket.on('end',function(data){
-         winnerImage();
-          stopTimer();
+        winnerImage();
+        stopTimer();
         $("#getStart").prop("disabled", false);
-        $("#getStart").fadeIn(2000);
+        //$("#getStart").fadeIn(2000);
       });
       $("#testStart").click(function(){
-    	 myGame(); 
+        randomImges();
+        btnPushSound();
+    	  myGame(); 
       });
 });
   </script>
 
-    <script src='./js/tetris.js'  type="text/javascript"></script>
-    <script src='./js/render.js'  type="text/javascript"></script>
-    <script src='./js/controller.js'  type="text/javascript"></script>
-    <script src='./js/emitprocess.js'></script>
-    <script src='./js/enemyRender.js'></script>
-    <script src='./js/attack.js'></script>
-    <script src='./js/judge.js'></script>
+    <script src='./js/tetris.js' type='text/javascript'></script>
+    <script src='./js/render.js' type='text/javascript'></script>
+    <script src='./js/controller.js' type='text/javascript'></script>
+    <script src='./js/emitprocess.js' type='text/javascript'></script>
+    <script src='./js/enemyRender.js' type='text/javascript'></script>
+    <script src='./js/attack.js' type='text/javascript'></script>
+    <script src='./js/heart.js' type='text/javascript'></script>
+    <script src='./js/effect.js' type='text/javascript'></script>
+    <script src='./js/sounds.js' type='text/javascript'></script>
+  </div>
   </body>
 </html>

@@ -13,6 +13,11 @@ var mAfter = false;
 var renderInterval ;
 var emitInterval;
 var isVS;
+var nextShape;//ランダムで選ばれた形・カラー設定されたもの
+var rowFilledCount = 0;　//消した行のカウント
+let attackedCounter = 0; //攻撃をうけた行のカウント
+let heartCount = 0; //ハート保持
+let maxItems = 4; //アイテム保持
 
 //操作するブロックのパターン
 ////空のマスは0, 色のマスは1以上としてセット
@@ -57,6 +62,36 @@ function newShape() {
 
   var shape = shapes[nextId];
 
+  if(nextShape == null){
+    nextShape = shapes[nextId];
+    let includeHeart = false;
+    for(let k = 0;k < nextShape.length; k++){
+      if(!nextShape[k]){
+        continue;
+      }
+      //heart
+      if(!includeHeart && Math.random()*10 < 2){
+        nextShape[k] = 10;
+        includeHeart = true;
+      }else{
+        nextShape[k]= nextId+1;
+      }
+    }
+  }
+  let includeHeart = false;
+  for(let k = 0;k < shape.length; k++){
+    if(!shape[k]){
+      continue;
+    }
+    //heart
+    if(!includeHeart && Math.random()*10 < 2){
+      shape[k] = 10;
+      includeHeart = true;
+    }else{
+      shape[k]= nextId+1;
+    }
+  }
+
   //操作ブロックは4 x 4マスの中で表現
   //パターンを操作ブロックへセットする
   current = [];
@@ -64,10 +99,13 @@ function newShape() {
     current[y] = [];
     for (var x = 0; x < 4; ++x) {
       var i = 4 * y + x;
-      if (typeof shape[i] != 'undefined' && shape[i]) {
-        current[y][x] = nextId + 1;
-      }
-      else {
+      if (/*typeof*/ nextShape[i] != 'undefined' && nextShape[i]) {
+        current[y][x] = nextShape[i];
+        //heart
+        // if(Math.random()*100 < 2){
+        //   current[y][x] = 9;
+        // }
+      }else {
         current[y][x] = 0;
       }
     }
@@ -77,6 +115,7 @@ function newShape() {
   currentX = 3;
   currentY = 0;
   nextId = id;
+  nextShape = shape;
 }
 
 //盤面に関する関数　０：何もない　１～：ブロック
@@ -106,10 +145,12 @@ function tick() {
   // もし着地していたら(１つしたにブロックがあったら)
   else {
     freeze();  // 操作ブロックを盤面へ固定する
+    freezeSound();
     clearLines();  // ライン消去処理
     //ブロックが着地するまでグレイのラインが出ないようにする。
     if(mAfter){
       addStoneLine(8);
+      stoneSound();
       mAfter=false;
     }
     //自分の消したライン分、相手にラインを送れる
@@ -117,11 +158,13 @@ function tick() {
       for(var i = 0; i < attackedCounter ; ++i){
         upLineForAttacked();
       }
+      attackedSound();
       attackedCounter = 0;
     }
     //ゲームオーバーになった時
     if (lose && isVS) {
       //負けた人様の画像
+      BGMStop();
       loserImage();
       //相手に負けたことを送る
       socket.emit('end','winner');
@@ -172,34 +215,100 @@ function rotate(current) {
 //②そろっていたらその上にあったブロックを１つずつ下へずらす。(消去)
 //一行そろっているかどうかはrowFilled変数に代入する。
 
+//削除予定
+// //一行そろっているか調べ、そろっていたらその行を消す
+// function clearLines2() {
+//   for (var y = ROWS - 1; y >= 0; --y) {
+//     var rowFilled = true;
+//     //一行がそろっているのか調べる
+//     for(var x = 0; x < COLS; ++x){
+//       if (board[y][x] == 0) {
+//         rowFilled = false;
+//         break;
+//       }
+//     }
+//     //一行確認し、もし空白マスがなければその行を消す(不可ブロック(8)は除く)
+//     if (rowFilled && board[y][0] !== 8) {
+//       //countLine(true)
+//       if(board[y][0] === 9){
+//         pinkAttack()
+//       }else{
+//         attack()
+//       }
+//       for (var yy = y; yy>0; --yy) {
+//         for ( x = 0; x < COLS; ++x) {
+//           if(board[yy - 1][x] === 10){
+//             heartCount === maxItems ? "" : heartCount++;
+//           }
+//           board[yy][x] = board[yy - 1][x];
+//         }
+//       }
+//       ++y; //一行落とした為、チェック処理を１つ下へ送る
+//     }
+//   }
+// //countLine(false)
+// }
+
 //一行そろっているか調べ、そろっていたらその行を消す
 function clearLines() {
   for (var y = ROWS - 1; y >= 0; --y) {
-    var rowFilled = true;
     //一行がそろっているのか調べる
-    for(var x = 0; x < COLS; ++x){
-      if (board[y][x] == 0) {
-        rowFilled = false;
-        break;
-      }
+    if (!board[y].includes(0) && !board[y].includes(8)) {
+      rowFilledCount++;
+    }   
+  }
+  for(let i = 0; i < rowFilledCount; i++){
+    clearOneLine(false);
+  }
+//countLine(false)
+}
+
+//heart
+function clearOneLine(isIgnore){
+  for (var y = ROWS - 1; y >= 0; --y) {
+    var rowFilled = false;
+    //一行がそろっているのか調べる
+    if (!board[y].includes(0) && !board[y].includes(8)) {
+      rowFilled = true;
     }
-    //一行確認し、もし空白マスがなければその行を消す(不可ブロックは除く)
+    if(isIgnore){
+      rowFilled = true;
+    }
+    //一行確認し、もし空白マスがなければその行を消す(不可ブロック(8)は除く)
     if (rowFilled && board[y][0] !== 8) {
-      if(board[y][0] === 9){
+      //countLine(true)
+      if(board[y][0] === 9 || board[y][1] === 9){//ピンクは必ず９マスある為
         pinkAttack()
       }else{
         attack()
       }
+      for(let col=0; col<COLS; col++){
+        if(board[y][col] === 10){
+          heartCount === maxItems ? "" : heartCount++;
+          console.log("increment:" + heartCount + ":" + board[yy - 1]);
+          heartRender();
+        }
+      }
+      //rowFilled == trueより上の行を一行落とす処理
       for (var yy = y; yy>0; --yy) {
-        for ( x = 0; x < COLS; ++x) {
+        for (var x = 0; x < COLS; ++x) {
           board[yy][x] = board[yy - 1][x];
         }
       }
       ++y; //一行落とした為、チェック処理を１つ下へ送る
+      break;
     }
   }
-
 }
+
+//heart render 
+function heartRender(){
+  for(let i = 0 ; i < heartCount; i++){
+    console.log('heaertS');
+    $('.heart' + (i + 1)).show();
+    console.log('heaertR');
+  }
+};
 
 //キーボードが押された時の処理
 //上が押された時は回転。
@@ -230,10 +339,10 @@ function keyPress(key) {
         current = rotated;//回せる場合は回したあとの状態に操作ブロックをセットする。
       }else if(valid(1,0,rotated)){
     	  current = rotated;
-    	  ++currentX;
+        ++currentX;
       }else if(valid(-1,0,rotated)){
     	  current = rotated;
-    	  --currentX;
+        --currentX;
       }
       break;
     case 'pose':
@@ -243,12 +352,20 @@ function keyPress(key) {
         socket.emit('pose',true);
         console.log(poseFlag);
         console.log("stop");
+        btnPushSound();
       }else{//poseBtnが押されている(pose解除)
         pose(false);
         socket.emit('pose',false);
         console.log(poseFlag);
         console.log("start");
+        btnPushSound();
       }
+      break;
+    case 'heart':
+      myHeart();
+      heartClearSound();
+      $('img[class^="heart"]').hide();
+      break;
   }
 }
 
@@ -256,10 +373,12 @@ function keyPress(key) {
 function pose(flag){
   if(flag){
     poseShow();
+    BGMStop();
     stopTimer();
     poseFlag = true;
   }else{
     poseHide();
+    BGMStart();
     startTimer();
     poseFlag = false;
   }
@@ -315,6 +434,7 @@ function timer() {
   //1分ごとの処理（不可ブロック一段追加）
   if(beforeMinutes+1 === minutes){
       beforeMinutes++;
+      minutsAlertSound();
       mAfter = true;
   }
 }
@@ -336,11 +456,12 @@ function addStoneLine(blockNumber){
 
 //new game 画面を呼びだす
 function newGame(vsOrNot) {
-	isVS = vsOrNot;
+  isVS = vsOrNot;
 	clearInterval(interval); //ゲームタイマーをクリア
 	clearInterval(timerCount);
 	init(); //盤面をリセット
-	newShape(); //操作ブロックをセット
+  newShape(); //操作ブロックをセット
+  BGMStart();
 	interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
 	startTime = Date.now();
 	timerCount = setInterval( timer,1000 ); //
@@ -349,7 +470,8 @@ function newGame(vsOrNot) {
 	if(isVS){
 		lose = false; //負けフラグ
 		emitInterval = setInterval(myInfo,20);
-		attackedCounter = 0;
+    attackedCounter = 0;
+    BGMStop();
 	}
 	$(".win").hide();
 	$(".lose").hide();
@@ -374,6 +496,6 @@ function stopTimer(){
 function startTimer(){
   interval = setInterval(tick,500);
   timerCount = setInterval(timer,1000); 
-  renderInterval = setInterval(render,20)
-  emitInterval = setInterval(myInfo,20)
+  renderInterval = setInterval(render,20);
+  emitInterval = setInterval(myInfo,20);
 }

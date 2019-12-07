@@ -18,20 +18,20 @@ stone.src = "../images/tetrisBlockStone30.png";
 var pink =new Image();//アタックブロック
 pink.src = "../images/tetrisBlockPink30.png";
 var heart =new Image();//回復ブロック
-heart.src = "../images/tetrisBlockHeart30.png";
+heart.src = "../images/tetrisBlockHeart30Line.png";
 
 var imageBlocks = [cyan,orange,blue,yellow,red,green,purple,stone,pink,heart];
 //render.jsにcanvasの描写処理を書いていく
 //描写処理はtetris.jsのメインループ処理とは完全に独立してループする
 //1canvasのベース
 //現在の盤面の状態を描写する処理
-var myCanvas = document.getElementById('mydisp'); //canvas
+var myCanvas = document.getElementById('myDisp'); //canvas
 var ctx = myCanvas.getContext('2d'); //コンテクスト
 var W = 300, H = 600; //canvas size
 var BLOCK_W = W/COLS, BLOCK_H = H/ROWS;　//マスの幅を設定
 
 var nextCanvas =
-document.getElementById('nextShape');
+document.getElementById('myNextShape');
 nextCanvas.width = 60;
 nextCanvas.height =120;
 var ctx2 = nextCanvas.getContext('2d');
@@ -88,22 +88,34 @@ function render() {
       }
     }
   }
-  nextRender(nextId);
+  nextRender(nextShape);
 }
 //30ミリ秒ごとに状態を描写する関数を呼び出す
 //setInterval(render,30);
 
-function nextRender(nextId){
-  var shape = shapes[nextId];
-  var color = colors[nextId];
-  var imageBlock   = imageBlocks[nextId];
+// function nextRender(nextId){
+//   var shape = shapes[nextId];
+//   var color = colors[nextId];
+//   var imageBlock   = imageBlocks[nextId];
+//   ctx2.clearRect(0, 0, 120, 120);
+//   ctx2.fillStyle = color;
+//   ctx2.strokeStyle = 'black';
+//   for(var i = 0 ; i < shape.length ; ++i){
+//     if(shape[i] !== 0){
+//       var x = parseInt((i-4)/4)===0?1:0;
+//     ctx2.drawImage(imageBlock,parseInt(x)*30,parseInt((i-4)%4)*30); //ctx2.strokeRect(parseInt(x)*30,parseInt((i-4)%4)*30,30,30);
+//     }
+//   }
+// }
+
+function nextRender(nextShape){
   ctx2.clearRect(0, 0, 120, 120);
-  ctx2.fillStyle = color;
   ctx2.strokeStyle = 'black';
-  for(var i = 0 ; i < shape.length ; ++i){
-    if(shape[i] !== 0){
+  for(var i = 0 ; i < nextShape.length ; ++i){
+    if(nextShape[i] !== 0){
+      ctx2.fillStyle = colors[nextShape[i]];
       var x = parseInt((i-4)/4)===0?1:0;
-    ctx2.drawImage(imageBlock,parseInt(x)*30,parseInt((i-4)%4)*30); //ctx2.strokeRect(parseInt(x)*30,parseInt((i-4)%4)*30,30,30);
+    ctx2.drawImage(imageBlocks[nextShape[i]-1],parseInt(x)*30,parseInt((i-4)%4)*30); //ctx2.strokeRect(parseInt(x)*30,parseInt((i-4)%4)*30,30,30);
     }
   }
 }
