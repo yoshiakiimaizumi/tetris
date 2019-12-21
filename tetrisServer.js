@@ -153,6 +153,11 @@ io.sockets.on('connection', function (socket) {
   socket.on('attack',function(data){
     //console.log(data);
     io.to(battleMap.get(socket.id)).emit('attack', '');
+    
+  });
+  socket.on('attackedCounter',function(data){
+    //console.log(data);
+    io.to(battleMap.get(socket.id)).emit('attackedCounter',data);
   });
   socket.on('pose',function(data){
     //console.log(data);

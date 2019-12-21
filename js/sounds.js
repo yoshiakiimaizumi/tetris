@@ -27,11 +27,16 @@ function BGMStop(){
     battleAudio1.pause();
 }
 
-function attackedSound(){
-    if(attackedCounter <= 2){
+function attackedSound(count){
+    if(count == 0){
+        return;
+    }
+    if(count <= 2){
         attackedAudio1.play();
-    }else if(attackedCounter === 3){
+        console.log("ATAA12")
+    }else if(count === 3){
         attackedAudio2.play();
+        console.log("ATAA3")
     }else{
         attackedAudio3.play();
     }
@@ -44,10 +49,13 @@ function stoneSound(){
     stoneAudio.play();
 }
 
-function clearLinesSound(){
-    if(rowFilledCount <= 2){
+function clearLinesSound(count){
+    if(count === 0){
+        return;
+    }
+    if(count <= 2){
         clearLinesAudio1.play();
-    }else if(rowFilledCount === 3){
+    }else if(count === 3){
         clearLinesAudio2.play();
     }else{
         clearLinesAudio3.play();
@@ -66,10 +74,6 @@ function heartClearSound(count){
 
 function btnPushSound(){
     btnPushAudio.play();
-}
-
-function moveSound(){
-    moveAudio.play();
 }
 
 function freezeSound(){

@@ -14,7 +14,6 @@ var renderInterval ;
 var emitInterval;
 var isVS;
 var nextShape;//ランダムで選ばれた形・カラー設定されたもの
-var rowFilledCount = 0;　//消した行のカウント
 let attackedCounter = 0; //攻撃をうけた行のカウント
 let heartCount = 0; //ハート保持
 let maxItems = 4; //アイテム保持
@@ -44,7 +43,7 @@ let maxItems = 4; //アイテム保持
     1, 1, 1 ]
 ];
 //ブロックの色
- colors = [
+colors = [
   'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple', 'stone','pink','heart'
 ];
 
@@ -158,7 +157,8 @@ function tick() {
       for(var i = 0; i < attackedCounter ; ++i){
         upLineForAttacked();
       }
-      attackedSound();
+      console.log("sund用",attackedCounter)
+      socket.emit('attackedCounter',attackedCounter);
       attackedCounter = 0;
     }
     //ゲームオーバーになった時
@@ -251,6 +251,7 @@ function rotate(current) {
 
 //一行そろっているか調べ、そろっていたらその行を消す
 function clearLines() {
+  let rowFilledCount = 0;//消した行のカウント
   for (var y = ROWS - 1; y >= 0; --y) {
     //一行がそろっているのか調べる
     if (!board[y].includes(0) && !board[y].includes(8)) {
@@ -261,6 +262,9 @@ function clearLines() {
     clearOneLine(false);
   }
 //countLine(false)
+  if(rowFilledCount !== 0){
+    clearLinesSound(rowFilledCount);
+  }
 }
 
 //heart
