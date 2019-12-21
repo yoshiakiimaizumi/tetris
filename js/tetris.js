@@ -264,7 +264,7 @@ function clearLines() {
 }
 
 //heart
-function clearOneLine(isIgnore){
+function clearOneLine(isIgnore,isHeart=false){
   for (var y = ROWS - 1; y >= 0; --y) {
     var rowFilled = false;
     //一行がそろっているのか調べる
@@ -277,11 +277,14 @@ function clearOneLine(isIgnore){
     //一行確認し、もし空白マスがなければその行を消す(不可ブロック(8)は除く)
     if (rowFilled && board[y][0] !== 8) {
       //countLine(true)
-      if(board[y][0] === 9 || board[y][1] === 9){//ピンクは必ず９マスある為
-        pinkAttack()
-      }else{
-        attack()
+      if(!isHeart){
+        if(board[y][0] === 9 || board[y][1] === 9){//ピンクは必ず９マスある為
+          pinkAttack()
+        }else{
+          attack()
+        }
       }
+      
       for(let col=0; col<COLS; col++){
         if(board[y][col] === 10){
           heartCount === maxItems ? "" : heartCount++;
@@ -338,10 +341,10 @@ function keyPress(key) {
       if (valid(0,0,rotated)) {
         current = rotated;//回せる場合は回したあとの状態に操作ブロックをセットする。
       }else if(valid(1,0,rotated)){
-    	  current = rotated;
+        current = rotated;
         ++currentX;
       }else if(valid(-1,0,rotated)){
-    	  current = rotated;
+        current = rotated;
         --currentX;
       }
       break;
@@ -363,7 +366,6 @@ function keyPress(key) {
       break;
     case 'heart':
       myHeart();
-      heartClearSound();
       $('img[class^="heart"]').hide();
       break;
   }
@@ -405,11 +407,11 @@ function valid ( offsetX, offsetY, newCurrent ) {
     for (var x = 0; x < 4; ++x) {
       if (newCurrent[y][x]) {
         if (typeof board [y + offsetY] == 'undefined'
-           || typeof board [y + offsetY][x + offsetX] == 'undefined'
-           || board [y + offsetY][x + offsetX]
-           || x + offsetX < 0
-           || y + offsetY >= ROWS
-           || x + offsetX >= COLS) {
+          || typeof board [y + offsetY][x + offsetX] == 'undefined'
+          || board [y + offsetY][x + offsetX]
+          || x + offsetX < 0
+          || y + offsetY >= ROWS
+          || x + offsetX >= COLS) {
                     if (offsetY == 1 && offsetX - currentX == 0 && offsetY - currentY >= 1) {
                         console.log('game over');
                         lose = true;
@@ -487,10 +489,10 @@ function myGame(){
 
 //タイマー関数
 function stopTimer(){
-   clearInterval(interval);
-   clearInterval(timerCount);
-   clearInterval(renderInterval);
-   clearInterval(emitInterval);
+  clearInterval(interval);
+  clearInterval(timerCount);
+  clearInterval(renderInterval);
+  clearInterval(emitInterval);
 }
 
 function startTimer(){

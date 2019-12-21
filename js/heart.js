@@ -4,9 +4,8 @@ function myHeart(){
     }
     let count = heartCount;
     for(let i = 0; i < count; i++){
-        clearOneLine(true);
+        clearOneLine(true,true);
     }
     heartClearSound(count);
     heartCount = 0;
-    console.log('heart'+ heartCount);
 }

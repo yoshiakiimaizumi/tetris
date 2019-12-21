@@ -9,7 +9,6 @@ function pinkAttack(){
     socket.emit('attack','')
     pinkClearLineCounter = 0;
   }
-
 }
 
 function upLineForAttacked(){
