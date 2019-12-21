@@ -208,6 +208,7 @@ img[class^="heart"]{
   color:#5160D8;
   font-size:25px;
   width:104px;
+  height: 64px;
   box-sizing: border-box;
   text-align: center;
   padding:10px;
@@ -229,9 +230,9 @@ img[class^="heart"]{
   color:#5160D8;
   font-size:25px;
   width:104px;
+  height: 64px;
   box-sizing: border-box;
   text-align: center;
-  padding:10px;
   border:solid 3px cornflowerblue;
   border-radius: 5px;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.73);
@@ -256,7 +257,6 @@ img[class^="heart"]{
   width:104px;
   box-sizing: border-box;
   text-align: center;
-  padding:10px;
   border:solid 3px cornflowerblue;
   border-radius: 5px;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.73);

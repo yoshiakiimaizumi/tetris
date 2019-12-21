@@ -1,7 +1,7 @@
 //勝利判定
 function winnerImage(){
-      $(".win").fadeIn(2000);
-      setTimeout('rect()');
+    $(".win").fadeIn(2000);
+    setTimeout('rect()');
 }
 
 function rect() {
@@ -15,8 +15,8 @@ function rect() {
 
 //敗北判定
 function loserImage(){
-      $(".lose").fadeIn(2000);
-       setTimeout('rectLose()');
+    $(".lose").fadeIn(2000);
+    setTimeout('rectLose()');
 }
 
 function rectLose() {
@@ -30,15 +30,15 @@ function rectLose() {
 
 //待ち判定
 function waitImage(){
-      $(".wait").show();
-       setTimeout('rectWait()');
+    $(".wait").show();
+    setTimeout('rectWait()');
 }
 
 function rectWait() {
     $(".wait").animate({
         right: "2000px" //要素を動かす位置
     }, 6000).animate({
-        right: "-630px"　//要素を戻す位置
+        right: "-630px"//要素を戻す位置
     }, 0)
     setTimeout("rectWait()", 3000);//アニメーションを繰り返す間隔
 }
@@ -75,8 +75,8 @@ let boxList = [".battleFiledInner", "canvas.main", ".timmer", ".nextShape",
     console.log(windowH);
 if(windowH <= 745){
     for(let i = 0; i < boxList.length; i++){
-        let currentW = $(boxList[i]).width();
-        let currentH = $(boxList[i]).height();
+        let currentW = $(boxList[i]).outerWidth();
+        let currentH = $(boxList[i]).outerHeight();
         console.log(currentW, currentH );
         $(boxList[i]).css({
             'width': currentW * ((windowH - 50) / 695),
@@ -84,57 +84,61 @@ if(windowH <= 745){
         });
         console.log("UMM" + currentW, currentH );
     }
-
+    $('.timmer').css('font-size','25px');
+    $('.myHeart li').css('padding-top','2.5px');
 };
+
 //フルスクリーンスイッチ(要検討)
-    // const fullBtn = $('#fullScreenSwitch');
+//ユーザージェスチャのみしか対応していない
+// const fullBtn = $('#fullScreenSwitch');
+// let fullMode = false;
 
-  
-    // const btn = document.querySelector('#btn');
-    // btn.addEventListener('click', (event) => {
-    // // フルスクリーンにする
-    //  myReqeustFullScreen(document.body);
-    // });
-
-    // function myReqeustFullScreen(element) {
-    //     if (element.webkitRequestFullscreen) {
-    //         //標準仕様
-    //         element.requestFullscreen();
-    //     }else if (element.webkitRequestFullscreen) {
-    //         // Safari, Chrome
-    //         element.webkitRequestFullscreen();
-    //     } else if (element.mozRequestFullScreen) {
-    //         // Firefox
-    //         element.mozRequestFullScreen();
-    //     } else if (element.msRequestFullscreen) {
-    //         // IE11+
-    //         element.msRequestFullscreen();
-    //     }else if(element.webkitRequestFullscreen) {
-    //         // 標準仕様
-    //         element.requestFullscreen();
-    //     }  
-    // }
-
-    // const btnExit = document.querySelector('#btnExit');
-    // btnExit.addEventListener('click', (event) => {
-    // // フルスクリーンを解除する
-    // myCancelFullScreen();
-    // });
-
-    // function myCancelFullScreen() {
-    // if (document.exitFullscreen) {
-    //     // 標準仕様
-    //     document.exitFullscreen();
-    // } else if (document.webkitCancelFullScreen) {
-    //     // Safari, Chrome
-    //     document.webkitCancelFullScreen();
-    // } else if (document.mozCancelFullScreen) {
-    //     // Firefox
-    //     document.mozCancelFullScreen();
-    // } else if (document.msExitFullscreen) {
-    //     // IE 11+
-    //     document.msExitFullscreen();
-    // }
-    // }
+// if(windowH <= 745){
+//     fullBtn.trigger('click');
+//     console.log('CLICK');
+// }
+// fullBtn.on('click', (event) => {
+//     // フルスクリーンにする
+//     if(!fullMode){
+//         myReqeustFullScreen(document.body);
+//         fullMode = true;
+//     }else{//フルスクリーン解除
+//         myCancelFullScreen();
+//         fullMode = false;
+//     }
+// });
+// function myReqeustFullScreen(element) {
+//     if (element.webkitRequestFullscreen) {
+//         //標準仕様
+//         element.requestFullscreen();
+//     }else if (element.webkitRequestFullscreen) {
+//         // Safari, Chrome
+//         element.webkitRequestFullscreen();
+//     } else if (element.mozRequestFullScreen) {
+//         // Firefox
+//         element.mozRequestFullScreen();
+//     } else if (element.msRequestFullscreen) {
+//         // IE11+
+//         element.msRequestFullscreen();
+//     }else if(element.webkitRequestFullscreen) {
+//         // 標準仕様
+//         element.requestFullscreen();
+//     }  
+// }
+// function myCancelFullScreen() {
+//     if (document.exitFullscreen) {
+//         // 標準仕様
+//         document.exitFullscreen();
+//     } else if (document.webkitCancelFullScreen) {
+//         // Safari, Chrome
+//         document.webkitCancelFullScreen();
+//     } else if (document.mozCancelFullScreen) {
+//         // Firefox
+//         document.mozCancelFullScreen();
+//     } else if (document.msExitFullscreen) {
+//         // IE 11+
+//         document.msExitFullscreen();
+//     }
+// }
 
 
