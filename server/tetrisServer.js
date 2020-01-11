@@ -3,6 +3,7 @@ var socketio = require('socket.io');
 var fs = require('fs');
 var url = require('url');
 var path = require('path');
+let soundsJason = require('./sounds.jason');
 
 var port_num = 3000;
 
@@ -171,3 +172,6 @@ io.sockets.on('connection', function (socket) {
     battleMap.delete(deleteEnemy);
   });
 });
+
+//sound
+const SOUNDS = soundsJason;
