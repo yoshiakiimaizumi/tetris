@@ -7,8 +7,8 @@ let attackedAudio3 = new Audio("../sounds/attacked/mens-ou1.mp3");
 let minutsAlertAudio = new Audio("../sounds/minutesAlert/warning1.mp3");
 let stoneAudio = new Audio("../sounds/stone/cursor6.mp3");
 
-let clearLinesAudio1 = new Audio("../sounds/clearLines/decision26.mp3");
-let clearLinesAudio2 = new Audio("../sounds/clearLines/decision28.mp3");
+let clearLinesAudio1 = new Audio("../sounds/clearLines/decision28.mp3");
+let clearLinesAudio2 = new Audio("../sounds/clearLines/decision26.mp3");
 let clearLinesAudio3 = new Audio("../sounds/clearLines/trumpet1.mp3");
 
 let heartClearAudio1 = new Audio("../sounds/heartClear/kira1.mp3");
@@ -16,8 +16,11 @@ let heartClearAudio2 = new Audio("../sounds/heartClear/kira2.mp3");
 let heartClearAudio3 = new Audio("../sounds/heartClear/line-girl1_line-girl1-yattane1.mp3");
 
 let btnPushAudio = new Audio("../sounds/btnPush/decision3.mp3");
-//let moveAudio = new Audio("../sounds/move/cursor8.mp3");
+
 let freezeAudio = new Audio("../sounds/move/cursor8.mp3");
+
+let winAudio = new Audio("../sounds/clearLines/trumpet1.mp3");
+let loseAudio = new Audio("../sounds/attacked/mens-ou1.mp3");
 
 function BGMStart(){
     battleAudio1.play();
@@ -78,4 +81,11 @@ function btnPushSound(){
 
 function freezeSound(){
     freezeAudio.play();
+}
+
+function winSound(){
+    winAudio.play();
+}
+function loseSound(){
+    loseAudio.play();
 }

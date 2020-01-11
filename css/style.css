@@ -108,6 +108,7 @@ canvas.main{
   font-size: 30px;
   vertical-align: middle;
   box-sizing: border-box;
+  line-height: 1;
 }
 
 .nextShapeInner{

@@ -88,7 +88,6 @@ $(function(){
         $("#getStart").prop("disabled", true);
         //$("#getStart").fadeOut(1000);
         waitImage();
-        BGMStop();
         socket.emit('aikotoba','start');
       });
       socket.on('toGame',function(data){
@@ -112,6 +111,7 @@ $(function(){
         winnerImage();
         BGMStop();
         stopTimer();
+        winSound();
         $("#getStart").prop("disabled", false);
         //$("#getStart").fadeIn(2000);
       });

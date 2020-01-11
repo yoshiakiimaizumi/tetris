@@ -166,6 +166,7 @@ function tick() {
       //負けた人様の画像
       BGMStop();
       loserImage();
+      loseSound();
       //相手に負けたことを送る
       socket.emit('end','winner');
       stopTimer();
@@ -465,7 +466,9 @@ function newGame(vsOrNot) {
   isVS = vsOrNot;
 	clearInterval(interval); //ゲームタイマーをクリア
 	clearInterval(timerCount);
-	init(); //盤面をリセット
+  init(); //盤面をリセット
+  heartCount = 0;
+  $('img[class^="heart"]').hide();
   newShape(); //操作ブロックをセット
   BGMStart();
 	interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
