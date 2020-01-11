@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
+  "name": "tetris_package",
+  "version": "0.0.0",
+=======
   "name": "git_tetris",
   "version": "1.0.0",
+>>>>>>> dev
   "description": "Socket io がないと使えません。",
   "main": "tetrisServer.js",
   "dependencies": {
@@ -14,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/yoshiakiimaizumi/tetris.git"
   },
-  "author": "",
+  "author": "schiaaa",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yoshiakiimaizumi/tetris/issues"

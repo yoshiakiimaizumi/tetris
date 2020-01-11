@@ -215,41 +215,6 @@ function rotate(current) {
 //①一行そろっている場所を調べる。
 //②そろっていたらその上にあったブロックを１つずつ下へずらす。(消去)
 //一行そろっているかどうかはrowFilled変数に代入する。
-
-//削除予定
-// //一行そろっているか調べ、そろっていたらその行を消す
-// function clearLines2() {
-//   for (var y = ROWS - 1; y >= 0; --y) {
-//     var rowFilled = true;
-//     //一行がそろっているのか調べる
-//     for(var x = 0; x < COLS; ++x){
-//       if (board[y][x] == 0) {
-//         rowFilled = false;
-//         break;
-//       }
-//     }
-//     //一行確認し、もし空白マスがなければその行を消す(不可ブロック(8)は除く)
-//     if (rowFilled && board[y][0] !== 8) {
-//       //countLine(true)
-//       if(board[y][0] === 9){
-//         pinkAttack()
-//       }else{
-//         attack()
-//       }
-//       for (var yy = y; yy>0; --yy) {
-//         for ( x = 0; x < COLS; ++x) {
-//           if(board[yy - 1][x] === 10){
-//             heartCount === maxItems ? "" : heartCount++;
-//           }
-//           board[yy][x] = board[yy - 1][x];
-//         }
-//       }
-//       ++y; //一行落とした為、チェック処理を１つ下へ送る
-//     }
-//   }
-// //countLine(false)
-// }
-
 //一行そろっているか調べ、そろっていたらその行を消す
 function clearLines() {
   let rowFilledCount = 0;//消した行のカウント
@@ -486,9 +451,7 @@ function newGame(vsOrNot) {
 	$(".lose").hide();
 	$(".wait").hide();
 }
-function test1(){
-  console.log("test1");
-}
+
 function myGame(){
   new newGame(false);
   console.log("myGame");
