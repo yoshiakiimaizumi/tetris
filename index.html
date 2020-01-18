@@ -80,45 +80,53 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
 $(function(){
-      socket = io.connect();
-      attackedCounter = 0;
-      $("#getStart").click(function(){
-        console.log("1 ok");
-        btnPushSound();
-        $("#getStart").prop("disabled", true);
-        //$("#getStart").fadeOut(1000);
-        waitImage();
-        socket.emit('aikotoba','start');
-      });
-      socket.on('toGame',function(data){
-        console.log("2 ok");
-        newGame(true);
-        BGMStart();
-      });
-      socket.on('board',function(data){
-        enemyRender(data);
-      });
-      socket.on('attack',function(data){
-        attackedCounter++;
-      });
-      socket.on('attackedCounter',function(data){
-        attackedSound(data);
-      });
-      socket.on('pose',function(data){
-        pose(data);
-      });
-      socket.on('end',function(data){
-        winnerImage();
-        BGMStop();
-        stopTimer();
-        winSound();
-        $("#getStart").prop("disabled", false);
-        //$("#getStart").fadeIn(2000);
-      });
-      $("#testStart").click(function(){
-        randomImges();
-        btnPushSound();myGame(); 
-      });
+  sound = null;
+  socket = io.connect();
+  attackedCounter = 0;
+  socket.on('soundsJsonData',function(data){
+    console.log(data)
+    sound = new Sound(data);
+  });
+  socket.emit('soundsJsonData','')
+  $("#getStart").click(function(){
+    console.log("1 ok");
+    sound.play('btnPush');
+    $("#getStart").prop("disabled", true);
+    //$("#getStart").fadeOut(1000);
+    waitImage();
+    socket.emit('aikotoba','start');
+  });
+  socket.on('toGame',function(data){
+    console.log("2 ok");
+    newGame(true);
+    sound.loop('BGM');
+  });
+  socket.on('board',function(data){
+    enemyRender(data);
+  });
+  socket.on('attack',function(data){
+    attackedCounter++;
+  });
+  socket.on('attackedCounter',function(data){
+    sound.play('attacked' + attackedCounter);
+  });
+  socket.on('pose',function(data){
+    pose(data);
+  });
+  socket.on('end',function(data){
+    winnerImage();
+    sound.stop('BGM');
+    stopTimer();
+    sound.play('win');
+    $("#getStart").prop("disabled", false);
+    //$("#getStart").fadeIn(2000);
+  });
+  $("#testStart").click(function(){
+    randomImges();
+    sound.play('btnPush');
+    myGame(); 
+  });
+  
 });
   </script>
 
