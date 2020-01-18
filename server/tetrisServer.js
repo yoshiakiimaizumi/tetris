@@ -3,7 +3,7 @@ var socketio = require('socket.io');
 var fs = require('fs');
 var url = require('url');
 var path = require('path');
-let soundsJason = require('./sounds.jason');
+let soundsJson = require('./sounds.json');
 
 var port_num = 3000;
 
@@ -171,7 +171,15 @@ io.sockets.on('connection', function (socket) {
     battleMap.delete(socket.id);
     battleMap.delete(deleteEnemy);
   });
+
+  //sound
+  let SOUNDS_JSON = soundsJson;
+  console.log(SOUNDS_JSON);
+  
+  socket.on('soundsJsonData',function(){
+    io.to(socket.id).emit('soundsJsonData', SOUNDS_JSON);
+  });
 });
 
-//sound
-const SOUNDS = soundsJason;
+//sound class
+

@@ -144,12 +144,12 @@ function tick() {
   // もし着地していたら(１つしたにブロックがあったら)
   else {
     freeze();  // 操作ブロックを盤面へ固定する
-    freezeSound();
+    sound.play('freeze');
     clearLines();  // ライン消去処理
     //ブロックが着地するまでグレイのラインが出ないようにする。
     if(mAfter){
       addStoneLine(8);
-      stoneSound();
+      sound.play('stone');
       mAfter=false;
     }
     //自分の消したライン分、相手にラインを送れる
@@ -157,16 +157,15 @@ function tick() {
       for(var i = 0; i < attackedCounter ; ++i){
         upLineForAttacked();
       }
-      console.log("sund用",attackedCounter)
       socket.emit('attackedCounter',attackedCounter);
       attackedCounter = 0;
     }
     //ゲームオーバーになった時
     if (lose && isVS) {
       //負けた人様の画像
-      BGMStop();
+      sound.stop('BGM');
       loserImage();
-      loseSound();
+      sound.play('lose');
       //相手に負けたことを送る
       socket.emit('end','winner');
       stopTimer();
@@ -264,7 +263,7 @@ function clearLines() {
   }
 //countLine(false)
   if(rowFilledCount !== 0){
-    clearLinesSound(rowFilledCount);
+    sound.play('clearLines' + rowFilledCount);
   }
 }
 
@@ -358,15 +357,13 @@ function keyPress(key) {
       if(!poseFlag){
         pose(true);
         socket.emit('pose',true);
-        console.log(poseFlag);
-        console.log("stop");
-        btnPushSound();
+        sound.play('btnPush');
+        sound.stop('BGM');
       }else{//poseBtnが押されている(pose解除)
         pose(false);
         socket.emit('pose',false);
-        console.log(poseFlag);
-        console.log("start");
-        btnPushSound();
+        sound.play('btnPush');
+        sound.loop('BGM');
       }
       break;
     case 'heart':
@@ -380,12 +377,12 @@ function keyPress(key) {
 function pose(flag){
   if(flag){
     poseShow();
-    BGMStop();
+    sound.stop('BGM');
     stopTimer();
     poseFlag = true;
   }else{
     poseHide();
-    BGMStart();
+    sound.loop('BGM');
     startTimer();
     poseFlag = false;
   }
@@ -441,7 +438,7 @@ function timer() {
   //1分ごとの処理（不可ブロック一段追加）
   if(beforeMinutes+1 === minutes){
       beforeMinutes++;
-      minutsAlertSound();
+      sound.play('minutsAlert');
       mAfter = true;
   }
 }
@@ -470,7 +467,7 @@ function newGame(vsOrNot) {
   heartCount = 0;
   $('img[class^="heart"]').hide();
   newShape(); //操作ブロックをセット
-  BGMStart();
+  sound.loop('BGM');
 	interval = setInterval( tick,500 ); //250ミリ秒ごとにtick関数を呼び出す
 	startTime = Date.now();
 	timerCount = setInterval( timer,1000 ); //
@@ -480,7 +477,7 @@ function newGame(vsOrNot) {
 		lose = false; //負けフラグ
 		emitInterval = setInterval(myInfo,20);
     attackedCounter = 0;
-    BGMStop();
+    sound.stop('BGM');
 	}
 	$(".win").hide();
 	$(".lose").hide();
