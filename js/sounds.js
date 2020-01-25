@@ -17,7 +17,6 @@ class Sound {
         }
         this.soundMap.get(name).loop = true;
         this.soundMap.get(name).play();
-        
     }
     stop(name){
         if(!this.soundMap.get(name)){
