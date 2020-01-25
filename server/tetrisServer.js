@@ -4,6 +4,7 @@ var fs = require('fs');
 var url = require('url');
 var path = require('path');
 let soundsJson = require('./sounds.json');
+let blocksJson = require('./blocks.json');
 
 var port_num = 3000;
 
@@ -174,10 +175,15 @@ io.sockets.on('connection', function (socket) {
 
   //sound
   let SOUNDS_JSON = soundsJson;
-  console.log(SOUNDS_JSON);
-  
   socket.on('soundsJsonData',function(){
     io.to(socket.id).emit('soundsJsonData', SOUNDS_JSON);
+  });
+  //block
+  let BLOCKS_JSON = blocksJson;
+  console.log(BLOCKS_JSON);
+  
+  socket.on('blocksJsonData',function(){
+    io.to(socket.id).emit('blocksJsonData', BLOCKS_JSON);
   });
 });
 

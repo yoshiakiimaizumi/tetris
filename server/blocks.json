@@ -1,0 +1,12 @@
+{
+    "cyan": "../images/tetrisBlockCyan30.png",
+    "orange": "../images/tetrisBlockOrange30.png",
+    "blue": "../images/tetrisBlockBlue30.png",
+    "yellow": "../images/tetrisBlockYellow30.png",
+    "red": "../images/tetrisBlockRed30.png",
+    "green": "../images/tetrisBlockGreen30.png",
+    "purple": "../images/tetrisBlockPurple30.png",
+    "stone": "../images/tetrisBlockStone30.png",
+    "pink": "../images/tetrisBlockPink30.png",
+    "heart": "../images/tetrisBlockHeart30Line.png"
+}

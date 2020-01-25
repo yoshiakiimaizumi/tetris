@@ -1,26 +1,29 @@
-var cyan = new Image();
-cyan.src = "../images/tetrisBlockCyan30.png";
-var orange =new Image();
-orange.src = "../images/tetrisBlockOrange30.png";
-var blue =new Image();
-blue.src = "../images/tetrisBlockBlue30.png";
-var yellow =new Image();
-yellow.src = "../images/tetrisBlockYellow30.png";
-var red =new Image();
-red.src = "../images/tetrisBlockRed30.png";
-var green =new Image();
-green.src = "../images/tetrisBlockGreen30.png";
-var purple =new Image();
-purple.src = "../images/tetrisBlockPurple30.png";
-//特殊ブロック
-var stone =new Image();//毎分下から追加のお邪魔ブロック
-stone.src = "../images/tetrisBlockStone30.png";
-var pink =new Image();//アタックブロック
-pink.src = "../images/tetrisBlockPink30.png";
-var heart =new Image();//回復ブロック
-heart.src = "../images/tetrisBlockHeart30Line.png";
+// var cyan = new Image();
+// cyan.src = "../images/tetrisBlockCyan30.png";
+// var orange =new Image();
+// orange.src = "../images/tetrisBlockOrange30.png";
+// var blue =new Image();
+// blue.src = "../images/tetrisBlockBlue30.png";
+// var yellow =new Image();
+// yellow.src = "../images/tetrisBlockYellow30.png";
+// var red =new Image();
+// red.src = "../images/tetrisBlockRed30.png";
+// var green =new Image();
+// green.src = "../images/tetrisBlockGreen30.png";
+// var purple =new Image();
+// purple.src = "../images/tetrisBlockPurple30.png";
+// //特殊ブロック
+// var stone =new Image();//毎分下から追加のお邪魔ブロック
+// stone.src = "../images/tetrisBlockStone30.png";
+// var pink =new Image();//アタックブロック
+// pink.src = "../images/tetrisBlockPink30.png";
+// var heart =new Image();//回復ブロック
+// heart.src = "../images/tetrisBlockHeart30Line.png";
 
-var imageBlocks = [cyan,orange,blue,yellow,red,green,purple,stone,pink,heart];
+// var imageBlocks = [cyan,orange,blue,yellow,red,green,purple,stone,pink,heart];
+
+
+
 //render.jsにcanvasの描写処理を書いていく
 //描写処理はtetris.jsのメインループ処理とは完全に独立してループする
 //1canvasのベース
