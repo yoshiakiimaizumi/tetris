@@ -429,7 +429,6 @@ function newGame(vsOrNot) {
 	clearInterval(interval); //ゲームタイマーをクリア
   clearInterval(timerCount);
   imageBlocks = block.types.map((val) => block.call(val));
-  console.log("AWW","imageBlocks")
   init(); //盤面をリセット
   heartCount = 0;
   $('img[class^="heart"]').hide();
@@ -440,8 +439,6 @@ function newGame(vsOrNot) {
 	timerCount = setInterval( timer,1000 ); //
 	beforeMinutes = 0;
   renderInterval = setInterval(render,20);
-  console.log("OOPS",block.call("cyan"));
-  console.log("A",block.types);
 	if(isVS){
 		lose = false; //負けフラグ
 		emitInterval = setInterval(myInfo,20);
